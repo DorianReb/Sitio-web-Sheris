@@ -11,6 +11,43 @@ Route::get('/', function () {
 
 Route::resource('categorias', CategoriaController::class);
 
+Route::resource('clientes', App\Http\Controllers\ClienteController::class);
+
+Route::resource('contactos', App\Http\Controllers\ContactoController::class);
+
+Route::resource('devoluciones', App\Http\Controllers\DevolucionController::class);
+
+Route::resource('detalle_ventas', App\Http\Controllers\DetalleVentaController::class);
+
+Route::resource('empleados', App\Http\Controllers\EmpleadoController::class);
+
+Route::resource('estado_reparto', App\Http\Controllers\EstadoRepartoController::class);
+
+Route::resource('facturas', App\Http\Controllers\FacturaController::class);
+
+Route::resource('inventarios', App\Http\Controllers\InventarioController::class);
+
+Route::resource('metodo_pago', App\Http\Controllers\MetodoPagoController::class);
+
+Route::resource('pagos', App\Http\Controllers\PagoController::class);
+
+Route::resource('producto_proveedor', App\Http\Controllers\ProductoProveedorController::class);
+
+Route::resource('productos', App\Http\Controllers\ProductoController::class);
+
+Route::resource('promociones', App\Http\Controllers\PromocionController::class);
+
+Route::resource('proveedor_contacto', App\Http\Controllers\ProveedorContactoController::class);
+
+Route::resource('proveedores', App\Http\Controllers\ProveedorController::class);
+
+Route::resource('puestos', App\Http\Controllers\PuestoController::class);
+
+Route::resource('repartos', App\Http\Controllers\RepartoController::class);
+
+Route::resource('usuarios', App\Http\Controllers\UsuarioController::class);
+
+Route::resource('ventas', App\Http\Controllers\VentaController::class);
 
 Auth::routes();
 
