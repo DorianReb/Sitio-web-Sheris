@@ -14,7 +14,7 @@
 <div class="container-fluid">
     <div class="row">
         <!-- Menú lateral pegado a la izquierda -->
-        <div class="col-2 bg-morena text-light vh-100 d-flex flex-column p-3">
+        <div class="col-2 bg-morena text-light min-vh-100 d-flex flex-column p-3">
             <h5 class="fw-bold">Menú</h5>
             <ul class="nav flex-column flex-grow-1">
                 <li class="nav-item"><a class="nav-link text-light fw-bold" href="{{ route('categorias.index') }}"><i class="fa-solid fa-th-large"></i>

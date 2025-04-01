@@ -9,7 +9,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::resource('categorias', CategoriaController::class);
+Route::resource('categorias', App\Http\Controllers\CategoriaController::class);
 
 Route::resource('clientes', App\Http\Controllers\ClienteController::class);
 

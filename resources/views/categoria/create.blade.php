@@ -3,7 +3,7 @@
 @section('content')
     <div class="row justify-content-center">
         <div class="col-8">
-            <h1 class="alert alert-success">Agregar Categoria</h1>
+            <h1 class="alert alert-success">Agregar Categoría</h1>
         </div>
         <div class="row justify-content-center">
             <div class="col-8">
@@ -17,12 +17,12 @@
             <form action="{{ route('categorias.store') }}" method="POST">
                 @csrf
                 <div class="mb-3">
-                    <label for="nombre" class="form-label">Nombre</label>
+                    <label for="Nombre" class="form-label">Nombre</label>
                     <input type="text" class="form-control" id="Nombre" name="Nombre" required>
                 </div>
 
                 <div class="mb-3">
-                    <label for="" class="form-label">Descripcion</label>
+                    <label for="Descripcion" class="form-label">Descripción</label>
                     <input type="text" class="form-control" id="Descripcion" name="Descripcion" required>
                 </div>
 
@@ -30,4 +30,5 @@
             </form>
         </div>
     </div>
-@endsection>
+@endsection
+

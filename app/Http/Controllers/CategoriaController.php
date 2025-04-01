@@ -26,19 +26,21 @@ class CategoriaController extends Controller
     {
         // Validación de datos
         $request->validate([
-            'nombre' => 'required|string|max:255|unique:categorias,Nombre',
-            'descripcion' => 'required|string|max:255',
+            'Nombre' => 'required|string|max:255|unique:categorias,Nombre',
+            'Descripcion' => 'required|string|max:255',
         ]);
-
+    
+        // Depuración: Verificar los datos antes de crear la categoría
+        \Log::info('Datos recibidos para guardar: ', $request->all());
+    
         // Creación de la categoría
         Categoria::create([
-            'Nombre' => $request->nombre,
-            'Descripcion' => $request->descripcion,
+            'Nombre' => $request->Nombre,
+            'Descripcion' => $request->Descripcion,
         ]);
-
-        return redirect()->route('categoria.index')->with('success', 'Categoría creada correctamente');
-
-        dd($request->all());
+    
+        // Retornar con un mensaje de éxito
+        return redirect()->route('categorias.index')->with('success', 'Categoría creada correctamente');
     }
 
     // Elimina una categoría de la base de datos
@@ -63,16 +65,24 @@ class CategoriaController extends Controller
     // Actualiza una categoría en la base de datos
     public function update(Request $request, $id_categoria)
     {
+        // Validación de datos
         $request->validate([
             'Nombre' => 'required|string|max:255|unique:categorias,Nombre,' . $id_categoria,
             'Descripcion' => 'required|string|max:255',
         ]);
 
-        $categoria = Categoria::findOrFail($id_categoria);  // Buscar la categoría por su ID
-        $categoria->Nombre = $request->Nombre;  // Actualizar el nombre
-        $categoria->Descripcion = $request->Descripcion;  // Actualizar la descripción
-        $categoria->save();  // Guardar los cambios
+        // Buscar la categoría por ID
+        $categoria = Categoria::findOrFail($id_categoria);
 
+        // Actualización de la categoría
+        $categoria->update([
+            'Nombre' => $request->Nombre,
+            'Descripcion' => $request->Descripcion,
+        ]);
+
+        // Redirigir con mensaje de éxito
         return redirect()->route('categorias.index')->with('success', 'Categoría actualizada correctamente');
     }
+
+
 }
