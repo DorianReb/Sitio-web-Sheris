@@ -13,6 +13,8 @@ class ProveedorController extends Controller
     public function index()
     {
         //
+        $proveedores = Proveedor::all();
+        return view('proveedores.index', compact('proveedores'));
     }
 
     /**
@@ -21,6 +23,7 @@ class ProveedorController extends Controller
     public function create()
     {
         //
+        return view('proveedores.create');
     }
 
     /**
@@ -29,6 +32,16 @@ class ProveedorController extends Controller
     public function store(Request $request)
     {
         //
+        $request->validate([
+            'Nombre' => 'required|string|max:255',
+            'Direccion' => 'required|string|max:255',
+        ]);
+
+        //Crear un nuevo proveedor
+        Proveedor::create($request->all());
+
+        //Redirigir y mostrar mensaje de éxito
+        return redirect()->route('proveedores.index')->with('success', 'Proveedor creado correctamente');
     }
 
     /**
@@ -37,6 +50,7 @@ class ProveedorController extends Controller
     public function show(Proveedor $proveedor)
     {
         //
+        return view('proveedores.show', compact('proveedor'));
     }
 
     /**
@@ -45,6 +59,7 @@ class ProveedorController extends Controller
     public function edit(Proveedor $proveedor)
     {
         //
+        return view('proveedores.edit', compact('proveedor'));
     }
 
     /**
@@ -53,6 +68,16 @@ class ProveedorController extends Controller
     public function update(Request $request, Proveedor $proveedor)
     {
         //
+        $request->validate([
+            'Nombre' => 'required|string|max:255',
+            'Direccion' => 'required|string|max:255',
+        ]);
+
+        //Actualizar datos del proveedor
+        $proveedor->update($request->all());
+
+        //Redirigir y mostrar mensaje de éxito
+        return redirect()->route('proveedores.index')->with('success', 'Proveedor actualizado correctamente');
     }
 
     /**
@@ -60,6 +85,10 @@ class ProveedorController extends Controller
      */
     public function destroy(Proveedor $proveedor)
     {
-        //
+        //Eliminar el proveedor
+        $proveedor->delete();
+
+        //Redirigir y mostrar mensaje de éxito
+        return redirect()->route('proveedores.index')->with('success', 'Proveedor eliminado correctamente');
     }
 }

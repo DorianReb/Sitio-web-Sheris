@@ -11,14 +11,14 @@ class CategoriaController extends Controller
     public function index()
     {
         $categorias = Categoria::all();  // Obtener todas las categorías
-        return view('categorias.index', compact('categorias'));  // Pasar la variable 'categorias' a la vista
+        return view('categoria.index', compact('categorias'));  // Pasar la variable 'categorias' a la vista
     }
 
 
     // Muestra el formulario de creación
     public function create()
     {
-        return view('categorias.create');
+        return view('categoria.create');
     }
 
     // Guarda una nueva categoría en la base de datos
@@ -26,17 +26,19 @@ class CategoriaController extends Controller
     {
         // Validación de datos
         $request->validate([
-            'Nombre' => 'required|string|max:100',
-            'Descripcion' => 'nullable|string|max:255',
+            'nombre' => 'required|string|max:255|unique:categorias,Nombre',
+            'descripcion' => 'required|string|max:255',
         ]);
 
         // Creación de la categoría
         Categoria::create([
-            'Nombre' => $request->Nombre,
-            'Descripcion' => $request->Descripcion,
+            'Nombre' => $request->nombre,
+            'Descripcion' => $request->descripcion,
         ]);
 
-        return redirect()->route('categorias.index')->with('success', 'Categoría creada correctamente');
+        return redirect()->route('categoria.index')->with('success', 'Categoría creada correctamente');
+
+        dd($request->all());
     }
 
     // Elimina una categoría de la base de datos
@@ -48,22 +50,22 @@ class CategoriaController extends Controller
         // Restablecer el auto-incremento (opcional)
         \DB::statement('ALTER TABLE categorias AUTO_INCREMENT = 1');
 
-        return redirect()->route('categorias.index')->with('success', 'Categoría eliminada correctamente.');
+        return redirect()->route('categoria.index')->with('success', 'Categoría eliminada correctamente.');
     }
 
     // Muestra el formulario de edición para una categoría específica
     public function edit($id_categoria)
     {
         $categoria = Categoria::findOrFail($id_categoria);  // Buscar la categoría por su ID
-        return view('categorias.edit', compact('categoria'));  // Pasamos la categoría a la vista de edición
+        return view('categoria.edit', compact('categoria'));  // Pasamos la categoría a la vista de edición
     }
 
     // Actualiza una categoría en la base de datos
     public function update(Request $request, $id_categoria)
     {
         $request->validate([
-            'Nombre' => 'required|string|max:100',
-            'Descripcion' => 'nullable|string|max:255',
+            'Nombre' => 'required|string|max:255|unique:categorias,Nombre,' . $id_categoria,
+            'Descripcion' => 'required|string|max:255',
         ]);
 
         $categoria = Categoria::findOrFail($id_categoria);  // Buscar la categoría por su ID
