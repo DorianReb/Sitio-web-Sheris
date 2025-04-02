@@ -4,7 +4,7 @@
 <div class="container">
     <h1>Lista de Promociones</h1>
     <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createModal">Crear Nueva Promoción</button>
-    
+
     @if(session('success'))
         <div class="alert alert-success mt-2">{{ session('success') }}</div>
     @endif
@@ -29,12 +29,12 @@
                     <td>{{ $promocion->Fecha_inicio }}</td>
                     <td>{{ $promocion->Fecha_final }}</td>
                     <td>
-                        <button class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#editModal{{ $promocion->Id_promocion }}">Editar</button>
-                        
+                        <button class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#editModal{{ $promocion->Id_promocion }}"><i class="fa-solid fa-pen-to-square"></i>Editar</button>
+
                         <form action="{{ route('promociones.destroy', $promocion->Id_promocion) }}" method="POST" style="display:inline;">
                             @csrf
                             @method('DELETE')
-                            <button type="submit" class="btn btn-danger" onclick="return confirm('¿Seguro que deseas eliminar esta promoción?')">Eliminar</button>
+                            <button type="submit" class="btn btn-danger" onclick="return confirm('¿Seguro que deseas eliminar esta promoción?')"><i class="fa-solid fa-trash"></i>Eliminar</button>
                         </form>
                     </td>
                 </tr>
