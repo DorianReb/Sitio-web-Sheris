@@ -1,41 +1,28 @@
-@extends('layouts.app') <!-- Cambia 'app' según tu layout base -->
+<div class="modal fade" id="createModal" tabindex="-1" aria-labelledby="createModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="createModalLabel">Crear Proveedor</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form action="{{ route('proveedores.store') }}" method="POST">
+                    @csrf
+                    
+                    <div class="mb-3">
+                        <label for="Nombre" class="form-label">Nombre</label>
+                        <input type="text" class="form-control" id="Nombre" name="Nombre" required>
+                    </div>
 
-@section('content')
-    <div class="row justify-content-center">
-        <div class="col-8 text-center">
-            <h1 class="alert alert-success">Agregar Proveedor</h1>
+                    <div class="mb-3">
+                        <label for="Direccion" class="form-label">Dirección</label>
+                        <textarea class="form-control" id="Direccion" name="Direccion"></textarea>
+                    </div>
+
+                    <button type="submit" class="btn btn-success">Guardar</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                </form>
+            </div>
         </div>
     </div>
-    <form action="{{ route('proveedores.store') }}" method="POST">
-        @csrf
-
-        <div class="row justify-content-center">
-            <div class="col-6 text-center m-3">
-                <label for="Nombre" class="fs-4 text-dark">Nombre del Proveedor</label>
-            </div>
-        </div>
-        <div class="row justify-content-center">
-            <div class="col-6 text-center m-3">
-                <input type="text" name="Nombre" id="Nombre" class="form-control" required>
-            </div>
-        </div>
-
-        <div class="row justify-content-center">
-            <div class="col-6 text-center m-3">
-                <label for="Direccion" class="fs-4 text-dark">Dirección del Proveedor</label>
-            </div>
-        </div>
-        <div class="row justify-content-center">
-            <div class="col-6 text-center m-3">
-                <input type="text" name="Direccion" id="Direccion" class="form-control" required>
-            </div>
-        </div>
-
-        <div class="row justify-content-center">
-            <div class="col-6 text-center m-3">
-                <button type="submit" class="btn btn-success">Guardar</button>
-            </div>
-        </div>
-
-    </form>
-@endsection
+</div>

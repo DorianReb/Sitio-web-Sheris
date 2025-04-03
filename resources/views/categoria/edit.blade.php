@@ -17,19 +17,10 @@
             </tr>
         </thead>
         <tbody>
-            @foreach($categorias as $categoria)
-                <tr>
-                    <td>{{ $loop->index + 1 }}</td>
-                    <td>{{ $categoria->Nombre }}</td>
-                    <td>{{ $categoria->Descripcion }}</td>
-                    <td>
-                        <button class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#editModal{{ $categoria->id_categoria }}">
+                <!-- Modal para editar la categoría -->
+                <button class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#editModal{{ $categoria->id_categoria }}">
                             <i class="fa-solid fa-pen-to-square"></i> Editar
                         </button>
-                    </td>
-                </tr>
-
-                <!-- Modal para editar la categoría -->
                 <div class="modal fade" id="editModal{{ $categoria->id_categoria }}" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
                     <div class="modal-dialog">
                         <div class="modal-content">
@@ -63,7 +54,6 @@
                         </div>
                     </div>
                 </div>
-            @endforeach
         </tbody>
     </table>
 @endsection

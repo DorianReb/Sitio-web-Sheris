@@ -9,10 +9,10 @@ class CategoriaController extends Controller
 {
     // Muestra todas las categorías
     public function index()
-    {
-        $categorias = Categoria::all();  // Obtener todas las categorías
-        return view('categoria.index', compact('categorias'));  // Pasar la variable 'categorias' a la vista
-    }
+        {
+            $categorias = Categoria::all();  // Obtener todas las categorías
+            return view('categoria.index', compact('categorias'));  // Pasar la variable 'categorias' a la vista
+        }
 
 
     // Muestra el formulario de creación
@@ -29,16 +29,16 @@ class CategoriaController extends Controller
             'Nombre' => 'required|string|max:255|unique:categorias,Nombre',
             'Descripcion' => 'required|string|max:255',
         ]);
-    
+        
         // Depuración: Verificar los datos antes de crear la categoría
         \Log::info('Datos recibidos para guardar: ', $request->all());
-    
+        
         // Creación de la categoría
         Categoria::create([
             'Nombre' => $request->Nombre,
             'Descripcion' => $request->Descripcion,
         ]);
-    
+        
         // Retornar con un mensaje de éxito
         return redirect()->route('categorias.index')->with('success', 'Categoría creada correctamente');
     }
@@ -52,7 +52,7 @@ class CategoriaController extends Controller
         // Restablecer el auto-incremento (opcional)
         \DB::statement('ALTER TABLE categorias AUTO_INCREMENT = 1');
 
-        return redirect()->route('categoria.index')->with('success', 'Categoría eliminada correctamente.');
+        return redirect()->route('categorias.index')->with('success', 'Categoría eliminada correctamente.');
     }
 
     // Muestra el formulario de edición para una categoría específica
