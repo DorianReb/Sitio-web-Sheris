@@ -1,0 +1,21 @@
+// Fonts
+@import url('https://fonts.bunny.net/css?family=Nunito');
+@import "@fortawesome/fontawesome-free/css/all.css";
+
+//Functions
+@import 'bootstrap/scss/functions';
+
+// Variables
+@import 'bootstrap/scss/variables';
+
+
+// Create your own map
+$custom-colors: (
+    "custom-color": $teal-500,
+);
+
+// Merge the maps
+$theme-colors: map-merge($theme-colors, $custom-colors);
+
+// Bootstrap
+@import 'bootstrap/scss/bootstrap';
