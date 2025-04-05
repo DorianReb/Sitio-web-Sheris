@@ -21,14 +21,6 @@
                     </div>
 
                     <div class="mb-3">
-                        <label for="Imagen" class="form-label">Imagen</label>
-                        <input type="file" class="form-control" id="Imagen" name="Imagen">
-                        @if($promocion->Imagen)
-                            <img src="{{ asset('storage/' . $promocion->Imagen) }}" class="img-fluid mt-2" width="150">
-                        @endif
-                    </div>
-
-                    <div class="mb-3">
                         <label for="Descuento" class="form-label">Descuento (%)</label>
                         <input type="number" class="form-control" id="Descuento" name="Descuento" min="0" max="100" value="{{ $promocion->Descuento }}" required>
                     </div>
@@ -41,6 +33,19 @@
                     <div class="mb-3">
                         <label for="Fecha_final" class="form-label">Fecha de Finalización</label>
                         <input type="date" class="form-control" id="Fecha_final" name="Fecha_final" value="{{ $promocion->Fecha_final }}" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="Imagen" class="form-label">Imagen</label>
+                        <input type="file" class="form-control" id="Imagen" name="Imagen">
+                        @if($promocion->Imagen)
+                            <img src="{{ asset('storage/' . $promocion->Imagen) }}" class="img-fluid mt-2" width="150">
+                        @endif
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="Alt_imagen" class="form-label">Texto Alternativo de la Imagen</label>
+                        <input type="text" class="form-control" id="Alt_imagen" name="Alt_imagen" value="{{ $promocion->Alt_imagen }}">
                     </div>
 
                     <button type="submit" class="btn btn-success">Actualizar</button>

@@ -8,7 +8,7 @@
             <div class="modal-body">
                 <form action="{{ route('promociones.store') }}" method="POST">
                     @csrf
-                    
+
                     <div class="mb-3">
                         <label for="Nombre" class="form-label">Nombre</label>
                         <input type="text" class="form-control" id="Nombre" name="Nombre" required>
@@ -32,6 +32,16 @@
                     <div class="mb-3">
                         <label for="Fecha_final" class="form-label">Fecha de Finalización</label>
                         <input type="date" class="form-control" id="Fecha_final" name="Fecha_final" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="Imagen" class="form-label">Imagen</label>
+                        <input type="file" class="form-control" id="Imagen" name="Imagen" accept="image/*">
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="Alt_imagen" class="form-label">Texto Alternativo de la Imagen</label>
+                        <input type="text" class="form-control" id="Alt_imagen" name="Alt_imagen">
                     </div>
 
                     <button type="submit" class="btn btn-success">Guardar</button>

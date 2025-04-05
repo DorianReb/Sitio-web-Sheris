@@ -8,7 +8,7 @@
             <div class="modal-body">
                 <form action="{{ route('productos.store') }}" method="POST" enctype="multipart/form-data">
                     @csrf
-                    
+
                     <div class="mb-3">
                         <label for="Nombre" class="form-label">Nombre</label>
                         <input type="text" class="form-control" id="Nombre" name="Nombre" required>
@@ -21,7 +21,10 @@
 
                     <div class="mb-3">
                         <label for="Precio" class="form-label">Precio</label>
-                        <input type="number" class="form-control" id="Precio" name="Precio" min="0" step="0.01" required>
+                        <div class="input-group">
+                            <span class="input-group-text">$</span>
+                            <input type="number" class="form-control" id="Precio" name="Precio" min="0" step="0.01" required>
+                        </div>
                     </div>
 
                     <div class="mb-3">
@@ -37,6 +40,16 @@
                                 <option value="{{ $categoria->Id_categoria }}">{{ $categoria->Nombre }}</option>
                             @endforeach
                         </select>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="imagen" class="form-label">Imagen del Producto</label>
+                        <input type="file" class="form-control" id="imagen" name="imagen" accept="image/*">
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="alt_imagen" class="form-label">Texto Alternativo de la Imagen</label>
+                        <input type="text" class="form-control" id="alt_imagen" name="alt_imagen">
                     </div>
 
 

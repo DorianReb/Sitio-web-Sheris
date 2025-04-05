@@ -9,13 +9,16 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
-    public function up(): void
+    public function up()
     {
-        Schema::create('estado_reparto', function (Blueprint $table) {
-            $table->id('Id_estado');  // Clave primaria personalizada
-            $table->string('estado');  // Columna Estado
-            $table->timestamps();  // Añade las columnas created_at y updated_at
-        });
+        // Verifica si la tabla no existe antes de crearla
+        if (!Schema::hasTable('estado_reparto')) {
+            Schema::create('estado_reparto', function (Blueprint $table) {
+                $table->id('Id_estado');
+                $table->string('estado');
+                $table->timestamps();
+            });
+        }
     }
 
     /**

@@ -9,11 +9,10 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
-    public function up(): void
+    public function up()
     {
-        Schema::create('puestos', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
+        Schema::table('estado_reparto', function (Blueprint $table) {
+            $table->softDeletes();
         });
     }
 
@@ -22,6 +21,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('puestos');
+        Schema::table('estado_reparto', function (Blueprint $table) {
+            //
+        });
     }
 };

@@ -9,15 +9,18 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
-    public function up(): void
-{
-    Schema::create('categorias', function (Blueprint $table) {
-        $table->id();
-        $table->string('nombre'); // Nombre de la categoría
-        $table->text('descripcion')->nullable(); // Descripción opcional
-        $table->timestamps(); // Campos created_at y updated_at
-    });
-}
+    public function up()
+    {
+        // Verifica si la tabla no existe antes de crearla
+        if (!Schema::hasTable('categorias')) {
+            Schema::create('categorias', function (Blueprint $table) {
+                $table->id();
+                $table->string('nombre');
+                $table->text('descripcion')->nullable();
+                $table->timestamps();
+            });
+        }
+    }
 
 
     /**

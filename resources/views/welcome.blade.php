@@ -38,51 +38,22 @@
     <section id="productos" class="container my-5">
         <h2 class="text-center fw-bold text-morena">Nuestros Productos Más Vendidos</h2>
         <div class="row g-4">
-            <!-- Producto 1 -->
-            <div class="col-md-4">
-                <div class="card h-100 shadow">
-                    <button type="button" class="btn p-0 text-start">
-                        <div class="d-flex align-items-center justify-content-center" style="height: 250px; overflow: hidden;">
-                            <img src="{{ asset('img/uno.png') }}" class="w-100 h-auto" alt="Juego de cartas UNO">
-                        </div>
-                        <div class="card-body">
-                            <h5 class="card-title fw-bold text-morena">UNO</h5>
-                            <p class="card-text">UNO es el clásico juego de cartas familiares que es fácil de aprender e imposible de dejar.</p>
-                            <p class="card-text fw-bold">$75.00 MXN</p>
-                        </div>
-                    </button>
+            @foreach ($productos as $producto)
+                <div class="col-md-4">
+                    <div class="card h-100 shadow">
+                        <button type="button" class="btn p-0 text-start">
+                            <div class="d-flex align-items-center justify-content-center" style="height: 250px; overflow: hidden;">
+                                <img src="{{ asset('img/' . $producto->imagen) }}" class="w-100 h-auto" alt="{{ $producto->nombre }}">
+                            </div>
+                            <div class="card-body">
+                                <h5 class="card-title fw-bold text-morena">{{ $producto->nombre }}</h5>
+                                <p class="card-text">{{ $producto->descripcion }}</p>
+                                <p class="card-text fw-bold">${{ number_format($producto->precio, 2) }} MXN</p>
+                            </div>
+                        </button>
+                    </div>
                 </div>
-            </div>
-            <!-- Producto 2 -->
-            <div class="col-md-4">
-                <div class="card h-100 shadow">
-                    <button type="button" class="btn p-0 text-start">
-                        <div class="d-flex align-items-center justify-content-center" style="height: 250px; overflow: hidden;">
-                            <img src="{{ asset('img/figura_spiderman.png') }}" class="w-100 h-auto" alt="Figura de Spiderman">
-                        </div>
-                        <div class="card-body">
-                            <h5 class="card-title fw-bold text-morena">Figura de Acción de El Hombre Araña</h5>
-                            <p class="card-text">Figura de Acción Hasbro Marvel Hombre Araña articulable de 30 cm para niños a partir de 4 años.</p>
-                            <p class="card-text fw-bold">$239.00 MXN</p>
-                        </div>
-                    </button>
-                </div>
-            </div>
-            <!-- Producto 3 -->
-            <div class="col-md-4">
-                <div class="card h-100 shadow">
-                    <button type="button" class="btn p-0 text-start">
-                        <div class="d-flex align-items-center justify-content-center" style="height: 250px; overflow: hidden;">
-                            <img src="{{ asset('img/login.jpg') }}" class="w-100 h-auto" alt="Peluche Metal Sonic">
-                        </div>
-                        <div class="card-body">
-                            <h5 class="card-title fw-bold text-morena">Metal Sonic Plush</h5>
-                            <p class="card-text">Hue Hue Hue Hue</p>
-                            <p class="card-text fw-bold">$420.00 MXN</p>
-                        </div>
-                    </button>
-                </div>
-            </div>
+            @endforeach
         </div>
     </section>
 
@@ -93,44 +64,19 @@
 
         <div class="container mt-4">
             <div class="row justify-content-center g-4">
-                <!-- Día del Niño -->
-                <div class="col-md-4">
-                    <div class="card h-100 text-center">
-                        <img src="{{ asset('img/niño.jpeg') }}" class="card-img-top img-fluid" alt="Promoción Día del Niño" style="height: 250px; object-fit: cover;">
-                        <div class="card-body d-flex flex-column">
-                            <h5 class="card-title text-morena fw-bold">Día del Niño</h5>
-                            <p class="card-text flex-grow-1">Celebra con un descuento especial en juguetes y juegos seleccionados.</p>
-                            <p class="card-text fw-bold">$199.00 MXN</p>
-                            <a href="#" class="btn btn-light text-morena mt-auto">Ver Promoción</a>
+                @foreach ($promociones as $promocion)
+                    <div class="col-md-4">
+                        <div class="card h-100 text-center">
+                            <img src="{{ asset('img/' . $promocion->imagen) }}" class="card-img-top img-fluid" alt="Promoción {{ $promocion->nombre }}" style="height: 250px; object-fit: cover;">
+                            <div class="card-body d-flex flex-column">
+                                <h5 class="card-title text-morena fw-bold">{{ $promocion->nombre }}</h5>
+                                <p class="card-text flex-grow-1">{{ $promocion->descripcion }}</p>
+                                <p class="card-text fw-bold">${{ number_format($promocion->precio, 2) }} MXN</p>
+                                <a href="#" class="btn btn-light text-morena mt-auto">Ver Promoción</a>
+                            </div>
                         </div>
                     </div>
-                </div>
-
-                <!-- Día de la Madre -->
-                <div class="col-md-4">
-                    <div class="card h-100 text-center">
-                        <img src="{{ asset('img/mamá.jpg') }}" class="card-img-top img-fluid" alt="Promoción Día de la Madre" style="height: 250px; object-fit: cover;">
-                        <div class="card-body d-flex flex-column">
-                            <h5 class="card-title text-morena fw-bold">Día de la Madre</h5>
-                            <p class="card-text flex-grow-1">Disfruta de un descuento exclusivo en productos seleccionados para mamá.</p>
-                            <p class="card-text fw-bold">$299.00 MXN</p>
-                            <a href="#" class="btn btn-light text-morena mt-auto">Ver Promoción</a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Día del Padre -->
-                <div class="col-md-4">
-                    <div class="card h-100 text-center">
-                        <img src="{{ asset('img/papá.jpg') }}" class="card-img-top img-fluid" alt="Promoción Día del Padre" style="height: 250px; object-fit: cover;">
-                        <div class="card-body d-flex flex-column">
-                            <h5 class="card-title text-morena fw-bold">Día del Padre</h5>
-                            <p class="card-text flex-grow-1">Ofertas especiales para sorprender a papá con un regalo único.</p>
-                            <p class="card-text fw-bold">$259.00 MXN</p>
-                            <a href="#" class="btn btn-light text-morena mt-auto">Ver Promoción</a>
-                        </div>
-                    </div>
-                </div>
+                @endforeach
             </div>
         </div>
     </section>

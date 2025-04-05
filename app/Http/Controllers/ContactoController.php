@@ -10,7 +10,8 @@ class ContactoController extends Controller
     // Mostrar todos los contactos
     public function index()
     {
-        $contactos = Contacto::all();  // Obtener todos los contactos
+        $contactos = Contacto::all();
+        // Obtener todos los contactos
         return view('contacto.index', compact('contactos'));  // Pasar los contactos a la vista
     }
 
@@ -23,14 +24,23 @@ class ContactoController extends Controller
     // Guardar un nuevo contacto
     public function store(Request $request)
     {
+
+        // Validación de datos
         $request->validate([
             'Correo' => 'required|email|unique:contactos,Correo',
             'Telefono' => 'required|numeric',
         ]);
 
-        Contacto::create($request->all());  // Crear el contacto
+        // Crear el contacto
+        Contacto::create([
+            'Correo' => $request->Correo,
+            'Telefono' => $request->Telefono,
+        ]);
+
+        // Redirigir con mensaje de éxito
         return redirect()->route('contactos.index')->with('success', 'Contacto creado correctamente.');
     }
+
 
     // Mostrar un contacto específico
     public function show(Contacto $contacto)
@@ -39,27 +49,37 @@ class ContactoController extends Controller
     }
 
     // Vista para editar un contacto
-    public function edit(Contacto $contacto)
+    public function edit ($id_contacto)
     {
+        $contacto = Contacto::findOrFail($id_contacto);
         return view('contacto.edit', compact('contacto'));  // Vista para editar
     }
 
     // Actualizar un contacto
-    public function update(Request $request, Contacto $contacto)
+    public function update(Request $request, $id_contacto)
     {
         $request->validate([
-            'Correo' => 'required|email|unique:contactos,Correo,' . $contacto->Id_contacto,
+            'Correo' => 'required|email|unique:contactos,Correo,' . $id_contacto . ',Id_contacto',
             'Telefono' => 'required|numeric',
         ]);
 
-        $contacto->update($request->all());  // Actualizar los datos del contacto
+        $contacto = Contacto::findOrFail($id_contacto);
+
+        $contacto->update([
+            'Correo' => $request->Correo,
+            'Telefono' =>$request->Telefono,
+        ]);  // Actualizar los datos del contacto
         return redirect()->route('contactos.index')->with('success', 'Contacto actualizado correctamente.');
     }
 
     // Eliminar un contacto
-    public function destroy(Contacto $contacto)
+    public function destroy($id_contacto)
     {
+        $contacto = Contacto::findOrFail($id_contacto);
         $contacto->delete();  // Eliminar el contacto
+
+        \DB::statement('ALTER TABLE contactos AUTO_INCREMENT = 1');
+
         return redirect()->route('contactos.index')->with('success', 'Contacto eliminado correctamente.');
     }
 }

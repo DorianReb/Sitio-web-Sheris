@@ -29,15 +29,30 @@ class PromocionController extends Controller
      */
     public function store(Request $request)
     {
+        // Validación de datos
         $request->validate([
             'Nombre' => 'required|string|max:255',
             'Descripcion' => 'nullable|string',
-            'Descuento' => 'required|numeric|min:0|max:100',
+            'Descuento' => 'required|numeric|min:0|max:75',
             'Fecha_inicio' => 'required|date',
             'Fecha_final' => 'required|date|after_or_equal:Fecha_inicio',
+            'Imagen' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'Alt_imagen' => 'nullable|string|max:255',
         ]);
 
-        Promocion::create($request->all());
+        // Depuración: Verificar los datos antes de crear la promoción
+        \Log::info('Datos recibidos para guardar: ', $request->all());
+
+        $data = $request->all();
+
+        // Si hay una imagen, se guarda en el almacenamiento público
+        if ($request->hasFile('Imagen')) {
+            $path = $request->file('Imagen')->store('promociones', 'public');
+            $data['Imagen'] = $path;
+        }
+
+        // Crear la promoción
+        Promocion::create($data);
 
         return redirect()->route('promociones.index')->with('success', 'Promoción creada correctamente.');
     }
@@ -56,6 +71,7 @@ class PromocionController extends Controller
      */
     public function update(Request $request, $id)
     {
+        // Validación de datos
         $request->validate([
             'Nombre' => 'required|string|max:255',
             'Descripcion' => 'nullable|string',
@@ -69,11 +85,18 @@ class PromocionController extends Controller
         $promocion = Promocion::findOrFail($id);
         $data = $request->all();
 
+        // Si se envió una nueva imagen, se guarda y actualiza la base de datos
         if ($request->hasFile('Imagen')) {
             $path = $request->file('Imagen')->store('promociones', 'public');
             $data['Imagen'] = $path;
         }
 
+        // Si hay un nuevo valor para Alt_imagen, lo actualizamos también
+        if ($request->has('Alt_imagen')) {
+            $data['Alt_imagen'] = $request->Alt_imagen;
+        }
+
+        // Actualizar la promoción
         $promocion->update($data);
 
         return redirect()->route('promociones.index')->with('success', 'Promoción actualizada exitosamente.');
@@ -86,6 +109,9 @@ class PromocionController extends Controller
     {
         $promocion = Promocion::findOrFail($id);
         $promocion->delete();
+
+        // Restablecer el autoincrement
+        \DB::statement('ALTER TABLE promociones AUTO_INCREMENT = 1');
         return redirect()->route('promociones.index')->with('success', 'Promoción eliminada exitosamente.');
     }
 }

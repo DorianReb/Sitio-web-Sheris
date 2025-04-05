@@ -25,22 +25,37 @@
             <h5 class="fw-bold">Menú</h5>
             </a>
             <ul class="nav flex-column flex-grow-1">
-                <li class="nav-item"><a class="nav-link text-light fw-bold" href="{{ route('categorias.index') }}"><i class="fa-solid fa-th-large"></i>
-                        Categorías</a></li>
+                <li class="nav-item">
+                    <a class="nav-link text-light fw-bold" href="{{ route('categorias.index') }}"><i class="fa-solid fa-th-large"></i>
+                        Categorías
+                    </a>
+                </li>
                 <li class="nav-item"><a class="nav-link text-light fw-bold" href="{{ route('proveedores.index') }}"><i class="fa-solid fa-truck-loading"></i>
                         Proveedores</a></li>
                 <li class="nav-item"><a class="nav-link text-light fw-bold" href="{{ route('productos.index') }}"><i class="fa-solid fa-box"></i>
                         Productos</a></li>
-                <li class="nav-item"><a class="nav-link text-light fw-bold" href="{{ route('ventas.index') }}"><i class="fa-solid fa-chart-line"></i>
-                        Ventas</a></li>
-                <li class="nav-item"><a class="nav-link text-light fw-bold" href="{{ route('clientes.index') }}"><i class="fa-solid fa-users"></i>
-                        Clientes</a></li>
-                <li class="nav-item"><a class="nav-link text-light fw-bold" href="{{ route('contactos.index') }}"><i class="fa-solid fa-address-book"></i>
-                        Contactos</a></li>
-                <li class="nav-item"><a class="nav-link text-light fw-bold" href="{{ route('inventarios.index') }}"><i class="fa-solid fa-cogs"></i>
-                        Inventarios</a></li>
-                <li class="nav-item"><a class="nav-link text-light fw-bold" href="{{ route('pagos.index') }}"><i class="fa-solid fa-wallet"></i>
-                        Pagos</a></li>
+                <li class="nav-item">
+                    <a class="nav-link text-light fw-bold" href="{{ route('puestos.index') }}"><i class="fa-solid fa-users"></i>
+                        Puestos
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-light fw-bold" href="{{ route('contactos.index') }}"><i class="fa-solid fa-address-book"></i>
+                        Contactos
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-light fw-bold" href="{{ route('estado_reparto.index') }}">
+                        <i class="fa-solid fa-cogs"></i> Estados de Reparto
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link text-light fw-bold" href="{{ route('metodo_pago.index') }}">
+                        <i class="fa-solid fa-wallet"></i> Métodos de Pago
+                    </a>
+                </li>
+
                 <li class="nav-item"><a class="nav-link text-light fw-bold" href="{{ route('promociones.index') }}"><i class="fa-solid fa-gift"></i>
                         Promociones</a></li>
             </ul>

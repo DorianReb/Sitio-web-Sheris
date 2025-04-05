@@ -4,17 +4,21 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Producto extends Model
 {
     use HasFactory;
+    use SoftDeletes;
 
     protected $table = 'productos';
     protected $primaryKey = 'Id_producto';
     protected $fillable = [
-        'Nombre', 'Descripcion', 'Imagen', 'Alt_imagen', 
+        'Nombre', 'Descripcion', 'Imagen', 'Alt_imagen',
         'Precio', 'Stock', 'Id_categoria', 'Fecha_alta'
     ];
+
+    public $timestamps = false;
 
     public function categoria()
     {

@@ -9,12 +9,17 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
-    public function up(): void
+    public function up()
     {
-        Schema::create('contactos', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
-        });
+        // Verifica si la tabla no existe antes de crearla
+        if (!Schema::hasTable('contactos')) {
+            Schema::create('contactos', function (Blueprint $table) {
+                $table->id('Id_contacto');
+                $table->string('Correo');
+                $table->string('Telefono');
+                $table->timestamps();
+            });
+        }
     }
 
     /**

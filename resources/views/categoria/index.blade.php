@@ -23,8 +23,8 @@
             <table class="table table-striped table-hover">
                 <thead>
                     <tr>
-                        <th>#</th>
-                        <th>Nombre de la Categoría</th>
+                        <th>ID</th>
+                        <th>Nombre</th>
                         <th>Descripción</th>
                         <th>Acciones</th>
                     </tr>
@@ -106,7 +106,8 @@
                             <label for="Descripcion" class="form-label">Descripción</label>
                             <input type="text" class="form-control" id="Descripcion" name="Descripcion" required>
                         </div>
-                        <button type="submit" class="btn btn-primary">Guardar</button>
+                        <button type="submit" class="btn btn-success">Guardar</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
                     </form>
                 </div>
             </div>

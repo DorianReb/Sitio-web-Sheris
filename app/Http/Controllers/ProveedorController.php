@@ -34,7 +34,13 @@ class ProveedorController extends Controller
             'Direccion' => 'nullable|string|max:255',
         ]);
 
-        Proveedor::create($request->all());
+        \Log::info('Datos recibidos para guardar: ', $request->all());
+
+        //Creacion de la categoria
+        Proveedor::create([
+            'Nombre' => $request->Nombre,
+            'Direccion' => $request->Direccion,
+        ]);
         return redirect()->route('proveedores.index')->with('success', 'Proveedor creado exitosamente.');
     }
 
@@ -49,22 +55,23 @@ class ProveedorController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Proveedor $proveedor)
+    public function edit(Proveedor $id_proveedor)
     {
+        $proveedor = Proveedor::findOrFail($id_proveedor);
         return view('proveedor.edit', compact('proveedor'));
     }
-
-
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Proveedor $proveedor)
+    public function update(Request $request, Proveedor $Id_proveedor)
     {
         $request->validate([
             'Nombre' => 'required|string|max:255',
             'Direccion' => 'nullable|string|max:255',
         ]);
+
+        $proveedor = Proveedor::findOrFail($Id_proveedor);
 
         $proveedor->update([
             'Nombre' => $request->Nombre,
@@ -77,9 +84,12 @@ class ProveedorController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Proveedor $proveedor)
+    public function destroy(Proveedor $id_proveedor)
     {
+        $proveedor=Proveedor::findOrFail($id_proveedor);
         $proveedor->delete();
+
+       \DB::statement('ALTER TABLE proveedores AUTO_INCREMENT = 1;');
         return redirect()->route('proveedores.index')->with('success', 'Proveedor eliminado exitosamente.');
     }
 

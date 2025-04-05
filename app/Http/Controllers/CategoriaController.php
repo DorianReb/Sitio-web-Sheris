@@ -29,38 +29,35 @@ class CategoriaController extends Controller
             'Nombre' => 'required|string|max:255|unique:categorias,Nombre',
             'Descripcion' => 'required|string|max:255',
         ]);
-        
+
         // Depuración: Verificar los datos antes de crear la categoría
         \Log::info('Datos recibidos para guardar: ', $request->all());
-        
+
         // Creación de la categoría
         Categoria::create([
             'Nombre' => $request->Nombre,
             'Descripcion' => $request->Descripcion,
         ]);
-        
+
         // Retornar con un mensaje de éxito
         return redirect()->route('categorias.index')->with('success', 'Categoría creada correctamente');
     }
 
-    // Elimina una categoría de la base de datos
-    public function destroy($id_categoria)
+    public function show(Categoria $categoria)
     {
-        $categoria = Categoria::findOrFail($id_categoria);
-        $categoria->delete();  // Elimina la categoría
-
-        // Restablecer el auto-incremento (opcional)
-        \DB::statement('ALTER TABLE categorias AUTO_INCREMENT = 1');
-
-        return redirect()->route('categorias.index')->with('success', 'Categoría eliminada correctamente.');
+        return view('categoria.show', compact('categoria'));
     }
 
-    // Muestra el formulario de edición para una categoría específica
     public function edit($id_categoria)
     {
         $categoria = Categoria::findOrFail($id_categoria);  // Buscar la categoría por su ID
         return view('categoria.edit', compact('categoria'));  // Pasamos la categoría a la vista de edición
     }
+
+
+
+    // Muestra el formulario de edición para una categoría específica
+
 
     // Actualiza una categoría en la base de datos
     public function update(Request $request, $id_categoria)
@@ -82,6 +79,18 @@ class CategoriaController extends Controller
 
         // Redirigir con mensaje de éxito
         return redirect()->route('categorias.index')->with('success', 'Categoría actualizada correctamente');
+    }
+
+    // Elimina una categoría de la base de datos
+    public function destroy($id_categoria)
+    {
+        $categoria = Categoria::findOrFail($id_categoria);
+        $categoria->delete();  // Elimina la categoría
+
+        // Restablecer el auto-incremento (opcional)
+        \DB::statement('ALTER TABLE categorias AUTO_INCREMENT = 1');
+
+        return redirect()->route('categorias.index')->with('success', 'Categoría eliminada correctamente.');
     }
 
 

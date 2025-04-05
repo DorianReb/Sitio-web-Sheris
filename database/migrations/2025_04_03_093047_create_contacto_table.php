@@ -9,12 +9,18 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
-    public function up(): void
+    public function up()
     {
-        Schema::create('contacto', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
-        });
+        //Alexis, eres un pendejo
+        // Verifica si la tabla no existe antes de crearla
+        if (!Schema::hasTable('contactos')) {
+            Schema::create('contactos', function (Blueprint $table) {
+                $table->id('Id_contacto');
+                $table->string('Correo');
+                $table->string('Telefono');
+                $table->timestamps();
+            });
+        }
     }
 
     /**
@@ -22,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('contacto');
+        Schema::dropIfExists('contactos');
     }
 };

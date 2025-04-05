@@ -60,30 +60,37 @@ class ProductoController extends Controller
     }
 
     public function store(Request $request)
-{
-    $request->validate([
-        'Nombre' => 'required|string|max:255',
-        'Descripcion' => 'nullable|string',
-        'Imagen' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
-        'Alt_imagen' => 'nullable|string|max:255',
-        'Precio' => 'required|numeric|min:0',
-        'Stock' => 'required|integer|min:0',
-        'Id_categoria' => 'required|exists:categorias,Id_categoria',
-    ]);
+    {
+        $request->validate([
+            'Nombre' => 'required|string|max:255',
+            'Descripcion' => 'nullable|string',
+            'Precio' => 'required|numeric',
+            'Stock' => 'required|integer',
+            'Id_categoria' => 'required|exists:categorias,Id_categoria',
+            'imagen' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+        ]);
 
-    Producto::create([
-        'Nombre' => $request->Nombre,
-        'Descripcion' => $request->Descripcion,
-        'Imagen' => $request->Imagen ? $request->file('Imagen')->store('productos', 'public') : null,
-        'Alt_imagen' => $request->Alt_imagen,
-        'Precio' => $request->Precio,
-        'Stock' => $request->Stock,
-        'Id_categoria' => $request->Id_categoria,
-        'Fecha_alta' => now(),
-    ]);
+        $producto = new Producto();
+        $producto->Nombre = $request->Nombre;
+        $producto->Descripcion = $request->Descripcion;
+        $producto->Precio = $request->Precio;
+        $producto->Stock = $request->Stock;
+        $producto->Id_categoria = $request->Id_categoria;
 
-    return redirect()->route('productos.index')->with('success', 'Producto creado exitosamente.');
-}
+        // Subir la imagen si existe
+        if ($request->hasFile('imagen')) {
+            $imagePath = $request->file('imagen')->store('productos', 'public');
+            $producto->Imagen = $imagePath;
+        } else {
+            $producto->Imagen = null;  // o una ruta por defecto si no hay imagen
+        }
+
+        $producto->Alt_imagen = $request->alt_imagen;
+
+        $producto->save();
+
+        return redirect()->route('productos.index')->with('success', 'Producto creado con éxito.');
+    }
 
 
     public function destroy(Producto $producto)

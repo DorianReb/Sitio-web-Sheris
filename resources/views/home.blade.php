@@ -160,7 +160,7 @@
             }
         });
 
-    
+
     // Gráfica de pastel para resumen de compras
      var resumenCtx = document.getElementById("resumenVentasChart").getContext("2d");
         new Chart(resumenCtx, {

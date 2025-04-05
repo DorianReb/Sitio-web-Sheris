@@ -3,11 +3,10 @@
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\CategoriaController;
+use App\Http\Controllers\WelcomeController;
 
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [App\Http\Controllers\WelcomeController::class, 'index'])->name('welcome');
 
 Route::resource('categorias', App\Http\Controllers\CategoriaController::class);
 
@@ -31,8 +30,6 @@ Route::resource('metodo_pago', App\Http\Controllers\MetodoPagoController::class)
 
 Route::resource('pagos', App\Http\Controllers\PagoController::class);
 
-Route::resource('producto_proveedor', App\Http\Controllers\ProductoProveedorController::class);
-
 Route::resource('productos', App\Http\Controllers\ProductoController::class);
 
 Route::resource('promociones', App\Http\Controllers\PromocionController::class);
@@ -48,6 +45,7 @@ Route::resource('repartos', App\Http\Controllers\RepartoController::class);
 Route::resource('usuarios', App\Http\Controllers\UsuarioController::class);
 
 Route::resource('ventas', App\Http\Controllers\VentaController::class);
+
 
 Auth::routes();
 
