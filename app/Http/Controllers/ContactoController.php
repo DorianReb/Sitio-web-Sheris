@@ -78,8 +78,6 @@ class ContactoController extends Controller
         $contacto = Contacto::findOrFail($id_contacto);
         $contacto->delete();  // Eliminar el contacto
 
-        \DB::statement('ALTER TABLE contactos AUTO_INCREMENT = 1');
-
         return redirect()->route('contactos.index')->with('success', 'Contacto eliminado correctamente.');
     }
 }

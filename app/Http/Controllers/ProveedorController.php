@@ -34,7 +34,6 @@ class ProveedorController extends Controller
             'Direccion' => 'nullable|string|max:255',
         ]);
 
-        \Log::info('Datos recibidos para guardar: ', $request->all());
 
         //Creacion de la categoria
         Proveedor::create([
@@ -89,7 +88,6 @@ class ProveedorController extends Controller
         $proveedor=Proveedor::findOrFail($id_proveedor);
         $proveedor->delete();
 
-       \DB::statement('ALTER TABLE proveedores AUTO_INCREMENT = 1;');
         return redirect()->route('proveedores.index')->with('success', 'Proveedor eliminado exitosamente.');
     }
 

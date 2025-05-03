@@ -40,9 +40,6 @@ class PromocionController extends Controller
             'Alt_imagen' => 'nullable|string|max:255',
         ]);
 
-        // Depuración: Verificar los datos antes de crear la promoción
-        \Log::info('Datos recibidos para guardar: ', $request->all());
-
         $data = $request->all();
 
         // Si hay una imagen, se guarda en el almacenamiento público
@@ -110,8 +107,6 @@ class PromocionController extends Controller
         $promocion = Promocion::findOrFail($id);
         $promocion->delete();
 
-        // Restablecer el autoincrement
-        \DB::statement('ALTER TABLE promociones AUTO_INCREMENT = 1');
         return redirect()->route('promociones.index')->with('success', 'Promoción eliminada exitosamente.');
     }
 }

@@ -41,16 +41,14 @@
             @foreach ($productos as $producto)
                 <div class="col-md-4">
                     <div class="card h-100 shadow">
-                        <button type="button" class="btn p-0 text-start">
-                            <div class="d-flex align-items-center justify-content-center" style="height: 250px; overflow: hidden;">
-                                <img src="{{ asset('img/' . $producto->imagen) }}" class="w-100 h-auto" alt="{{ $producto->nombre }}">
-                            </div>
-                            <div class="card-body">
-                                <h5 class="card-title fw-bold text-morena">{{ $producto->nombre }}</h5>
-                                <p class="card-text">{{ $producto->descripcion }}</p>
-                                <p class="card-text fw-bold">${{ number_format($producto->precio, 2) }} MXN</p>
-                            </div>
-                        </button>
+                        <div class="d-flex align-items-center justify-content-center" style="height: 250px; overflow: hidden;">
+                            <img src="{{ asset('storage/' . $producto->Imagen) }}" class="w-100 h-auto" alt="{{ $producto->Alt_imagen ?? $producto->Nombre }}">
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title fw-bold text-morena">{{ $producto->Nombre }}</h5>
+                            <p class="card-text">{{ $producto->Descripcion }}</p>
+                            <p class="card-text fw-bold">${{ number_format($producto->Precio, 2) }} MXN</p>
+                        </div>
                     </div>
                 </div>
             @endforeach
@@ -67,11 +65,17 @@
                 @foreach ($promociones as $promocion)
                     <div class="col-md-4">
                         <div class="card h-100 text-center">
-                            <img src="{{ asset('img/' . $promocion->imagen) }}" class="card-img-top img-fluid" alt="Promoción {{ $promocion->nombre }}" style="height: 250px; object-fit: cover;">
+                            <!-- Imagen de la promoción -->
+                            <img src="{{ asset('storage/' . $promocion->Imagen) }}" class="card-img-top img-fluid" alt="Promoción {{ $promocion->Nombre }}" style="height: 250px; object-fit: cover;">
                             <div class="card-body d-flex flex-column">
-                                <h5 class="card-title text-morena fw-bold">{{ $promocion->nombre }}</h5>
-                                <p class="card-text flex-grow-1">{{ $promocion->descripcion }}</p>
-                                <p class="card-text fw-bold">${{ number_format($promocion->precio, 2) }} MXN</p>
+                                <!-- Nombre de la promoción -->
+                                <h5 class="card-title text-morena fw-bold">{{ $promocion->Nombre }}</h5>
+                                <!-- Descripción de la promoción -->
+                                <p class="card-text flex-grow-1">{{ $promocion->Descripcion }}</p>
+                                <!-- Precio y descuento -->
+                                <p class="card-text fw-bold">Descuento: {{ $promocion->Descuento }}%</p>
+                                <p class="card-text text-muted">Válida desde: {{ \Carbon\Carbon::parse($promocion->Fecha_inicio)->format('d/m/Y') }} hasta: {{ \Carbon\Carbon::parse($promocion->Fecha_final)->format('d/m/Y') }}</p>
+                                <!-- Enlace para ver más detalles (puedes redirigir a una página específica si lo deseas) -->
                                 <a href="#" class="btn btn-light text-morena mt-auto">Ver Promoción</a>
                             </div>
                         </div>

@@ -30,9 +30,6 @@ class CategoriaController extends Controller
             'Descripcion' => 'required|string|max:255',
         ]);
 
-        // Depuración: Verificar los datos antes de crear la categoría
-        \Log::info('Datos recibidos para guardar: ', $request->all());
-
         // Creación de la categoría
         Categoria::create([
             'Nombre' => $request->Nombre,
@@ -86,9 +83,6 @@ class CategoriaController extends Controller
     {
         $categoria = Categoria::findOrFail($id_categoria);
         $categoria->delete();  // Elimina la categoría
-
-        // Restablecer el auto-incremento (opcional)
-        \DB::statement('ALTER TABLE categorias AUTO_INCREMENT = 1');
 
         return redirect()->route('categorias.index')->with('success', 'Categoría eliminada correctamente.');
     }

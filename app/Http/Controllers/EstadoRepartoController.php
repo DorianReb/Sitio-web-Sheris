@@ -28,9 +28,6 @@ class EstadoRepartoController extends Controller
             'Estado' => 'required|string|in:' . implode(',', EstadoReparto::ESTADOS),
         ]);
 
-        // Depuración: Verificar los datos antes de guardar el estado
-        \Log::info('Datos recibidos para guardar el estado de reparto: ', $request->all());
-
         // Creación del estado de reparto
         EstadoReparto::create([
             'Estado' => $request->Estado,
@@ -78,8 +75,6 @@ class EstadoRepartoController extends Controller
     {
         $estado = EstadoReparto::findOrFail($id_estado);
         $estado->delete();  // Elimina el estado
-
-        \DB::statement('ALTER TABLE estado_reparto AUTO_INCREMENT = 1');
 
         return redirect()->route('estado_reparto.index')->with('success', 'Estado de reparto eliminado correctamente.');
     }

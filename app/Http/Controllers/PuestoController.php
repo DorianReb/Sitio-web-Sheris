@@ -80,9 +80,6 @@ class PuestoController extends Controller
         $puesto = Puesto::findOrFail($id_puesto);
         $puesto->delete();
 
-        // Opcional: reiniciar el auto_increment
-        \DB::statement('ALTER TABLE puestos AUTO_INCREMENT = 1');
-
         return redirect()->route('puestos.index')->with('success', 'Puesto eliminado correctamente.');
     }
 }

@@ -28,8 +28,6 @@ class MetodoPagoController extends Controller
             'Metodo' => 'required|string|max:255|unique:metodo_pago,Metodo',  // Validar que el método sea único y no esté vacío
         ]);
 
-        \Log::info('Datos recibidos para guardar: ', $request->all());
-
         // Crear el nuevo método de pago
         MetodoPago::create([
             'Metodo' => $request->Metodo,
@@ -77,9 +75,6 @@ class MetodoPagoController extends Controller
     {
         $metodo_pago = MetodoPago::findOrFail($id_metodo_pago);  // Buscar el método de pago
         $metodo_pago->delete();  // Eliminar el método de pago
-
-        // Restablecer el auto-incremento
-        \DB::statement('ALTER TABLE metodo_pago AUTO_INCREMENT = 1');
 
         return redirect()->route('metodo_pago.index')->with('success', 'Método de pago eliminado correctamente.');
     }
