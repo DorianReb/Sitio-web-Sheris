@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Categoria;
+use App\Models\Producto;
+use App\Models\Proveedor;
 
 class HomeController extends Controller
 {
@@ -23,6 +26,9 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $categorias = Categoria::withCount('productos')->get();
+        $productos = Producto::all();
+        $proveedores = Proveedor::all();
+        return view('home', compact('categorias', 'productos', 'proveedores'));
     }
 }

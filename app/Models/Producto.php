@@ -18,7 +18,7 @@ class Producto extends Model
         'Precio', 'Stock', 'Id_categoria', 'Fecha_alta'
     ];
 
-    public $timestamps = false;
+    public $timestamps = true;
 
     public function categoria()
     {

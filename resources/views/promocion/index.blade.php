@@ -19,7 +19,7 @@
     @endif
 
     <div class="row justify-content-center mt-5">
-        <div class="col-8">
+        <div class="col-12">
             <table class="table table-striped table-hover">
                 <thead>
                 <tr>

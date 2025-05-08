@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ProductoController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\CategoriaController;
@@ -46,6 +47,7 @@ Route::resource('usuarios', App\Http\Controllers\UsuarioController::class);
 
 Route::resource('ventas', App\Http\Controllers\VentaController::class);
 
+Route::get('/productos-cliente', [ProductoController::class, 'mostrarTodos'])->name('productos.todos');
 
 Auth::routes();
 

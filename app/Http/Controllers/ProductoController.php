@@ -98,4 +98,25 @@ class ProductoController extends Controller
         $producto->delete();
         return redirect()->route('productos.index')->with('success', 'Producto eliminado exitosamente.');
     }
+
+    public function mostrarTodos(Request $request)
+    {
+        $categorias = \App\Models\Categoria::all();
+        $query = \App\Models\Producto::query();
+
+        if ($request->filled('categoria')) {
+            $query->where('Id_categoria', $request->categoria);
+        }
+
+        if ($request->filled('buscar')) {
+            $query->where(function ($q) use ($request) {
+                $q->where('Nombre', 'like', '%' . $request->buscar . '%')
+                    ->orWhere('Descripcion', 'like', '%' . $request->buscar . '%');
+            });
+        }
+
+        $productos = $query->latest()->paginate(9);
+
+        return view('producto.todos', compact('productos', 'categorias'));
+    }
 }

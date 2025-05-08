@@ -13,7 +13,7 @@ class Promocion extends Model
 
     protected $table = 'promociones';
     protected $primaryKey = 'Id_promocion';
-    public $timestamps = false; // 🔹 Desactiva timestamps
+    public $timestamps = true; // 🔹 Desactiva timestamps
     protected $fillable = [
         'Nombre',
         'Descripcion',

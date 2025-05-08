@@ -36,19 +36,19 @@
                 <!-- Menú principal -->
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link active text-light" href="#inicio"><i class="fa-solid fa-house text-light"></i> Inicio</a>
+                        <a class="nav-link active text-light" href={{ url('/') }}><i class="fa-solid fa-house text-light"></i> Inicio</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-light" href="#productos"><i class="fa-solid fa-basket-shopping text-light"></i> Productos</a>
+                        <a class="nav-link text-light" href="{{ route('productos.todos') }}"><i class="fa-solid fa-basket-shopping text-light"></i> Productos</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-light" href="#promociones"><i class="fa-solid fa-tag text-light"></i> Promociones</a>
+                        <a class="nav-link text-light" href="{{ url('/#promociones') }}"><i class="fa-solid fa-tag text-light"></i> Promociones</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-light" href="#sobre-nosotros"><i class="fa-solid fa-shop text-light"></i> Sobre Nosotros</a>
+                        <a class="nav-link text-light" href="{{ url('/#sobre-nosotros') }}"><i class="fa-solid fa-shop text-light"></i> Sobre Nosotros</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-light" href="#contacto"><i class="fa-solid fa-phone text-light"></i> Contacto</a>
+                        <a class="nav-link text-light" href="{{ url('/#contacto') }}"><i class="fa-solid fa-phone text-light"></i> Contacto</a>
                     </li>
                 </ul>
 

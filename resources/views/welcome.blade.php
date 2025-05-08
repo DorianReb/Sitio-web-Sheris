@@ -36,7 +36,7 @@
 
     <!-- Sección Productos -->
     <section id="productos" class="container my-5">
-        <h2 class="text-center fw-bold text-morena">Nuestros Productos Más Vendidos</h2>
+        <h2 class="text-center fw-bold text-morena">Nuestros Productos Más Recientes</h2>
         <div class="row g-4">
             @foreach ($productos as $producto)
                 <div class="col-md-4">
@@ -44,14 +44,19 @@
                         <div class="d-flex align-items-center justify-content-center" style="height: 250px; overflow: hidden;">
                             <img src="{{ asset('storage/' . $producto->Imagen) }}" class="w-100 h-auto" alt="{{ $producto->Alt_imagen ?? $producto->Nombre }}">
                         </div>
-                        <div class="card-body">
+                        <div class="card-body d-flex flex-column text-center">
                             <h5 class="card-title fw-bold text-morena">{{ $producto->Nombre }}</h5>
                             <p class="card-text">{{ $producto->Descripcion }}</p>
                             <p class="card-text fw-bold">${{ number_format($producto->Precio, 2) }} MXN</p>
+                            <a href="#" class="btn btn-light text-morena mt-auto">Ver Producto</a>
                         </div>
                     </div>
                 </div>
             @endforeach
+                <div class="text-center mt-4">
+                    <a href="{{ route('productos.todos') }}" class="btn btn-morena text-light fw-bold">Ver todos los productos</a>
+                </div>
+
         </div>
     </section>
 

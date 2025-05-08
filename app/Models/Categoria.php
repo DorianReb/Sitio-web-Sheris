@@ -17,4 +17,9 @@ protected $primaryKey = 'Id_categoria';
     public $timestamps = false;
 protected $fillable = ['Nombre', 'Descripcion'];
 
+    public function productos()
+    {
+        return $this->hasMany(Producto::class, 'id_categoria', 'Id_categoria');
+        // Si tu clave foránea en la tabla productos es 'id_categoria' y la primaria aquí es 'Id_categoria'
+    }
 }
