@@ -82,7 +82,7 @@ class ProductoController extends Controller
             $imagePath = $request->file('imagen')->store('productos', 'public');
             $producto->Imagen = $imagePath;
         } else {
-            $producto->Imagen = null;  // o una ruta por defecto si no hay imagen
+            $producto->Imagen = null;
         }
 
         $producto->Alt_imagen = $request->alt_imagen;

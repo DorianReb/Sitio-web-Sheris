@@ -29,7 +29,6 @@ class PromocionController extends Controller
      */
     public function store(Request $request)
     {
-        // Validación de datos
         $request->validate([
             'Nombre' => 'required|string|max:255',
             'Descripcion' => 'nullable|string',
@@ -42,7 +41,6 @@ class PromocionController extends Controller
 
         $data = $request->all();
 
-        // Si hay una imagen, se guarda en el almacenamiento público
         if ($request->hasFile('Imagen')) {
             $path = $request->file('Imagen')->store('promociones', 'public');
             $data['Imagen'] = $path;
@@ -68,7 +66,6 @@ class PromocionController extends Controller
      */
     public function update(Request $request, $id)
     {
-        // Validación de datos
         $request->validate([
             'Nombre' => 'required|string|max:255',
             'Descripcion' => 'nullable|string',
@@ -82,13 +79,11 @@ class PromocionController extends Controller
         $promocion = Promocion::findOrFail($id);
         $data = $request->all();
 
-        // Si se envió una nueva imagen, se guarda y actualiza la base de datos
         if ($request->hasFile('Imagen')) {
             $path = $request->file('Imagen')->store('promociones', 'public');
             $data['Imagen'] = $path;
         }
 
-        // Si hay un nuevo valor para Alt_imagen, lo actualizamos también
         if ($request->has('Alt_imagen')) {
             $data['Alt_imagen'] = $request->Alt_imagen;
         }

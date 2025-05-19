@@ -9,9 +9,9 @@
                     <div class="col-md-3">
                         <select name="categoria" class="form-select">
                             <option value="">-- Todas las Categorías --</option>
-                            @foreach ($categorias as $cat)
-                                <option value="{{ $cat->Id_categoria }}" {{ request('categoria') == $cat->Id_categoria ? 'selected' : '' }}>
-                                    {{ $cat->Nombre }}
+                            @foreach ($categorias as $categoria)
+                                <option value="{{ $categoria->Id_categoria }}" {{ request('categoria') == $categoria->Id_categoria ? 'selected' : '' }}>
+                                    {{ $categoria->Nombre }}
                                 </option>
                             @endforeach
                         </select>

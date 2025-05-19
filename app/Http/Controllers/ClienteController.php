@@ -26,19 +26,16 @@ class ClienteController extends Controller
 
     public function store(Request $request)
     {
-        // Validación de datos
         $request->validate([
             'Id_contacto' => 'required|exists:contactos,id',
             'Direccion_cliente' => 'required|string|max:255',
         ]);
 
-        // Guardar el cliente
         Cliente::create([
             'Id_contacto' => $request->Id_contacto,
             'Direccion_cliente' => $request->Direccion_cliente,
         ]);
 
-        // Redirigir con mensaje de éxito
         return redirect()->route('clientes.index')->with('success', 'Cliente creado correctamente.');
     }
 
@@ -46,8 +43,8 @@ class ClienteController extends Controller
     public function edit($id)
     {
         $cliente = Cliente::findOrFail($id);
-        $contactos = Contacto::all(); // Obtener todos los contactos
-        return view('cliente.edit', compact('cliente', 'contactos')); // Pasar $contactos a la vista
+        $contactos = Contacto::all();
+        return view('cliente.edit', compact('cliente', 'contactos'));
     }
 
 
@@ -59,24 +56,20 @@ class ClienteController extends Controller
             'Direccion_cliente' => 'required|string|max:255',
         ]);
 
-        // Buscar y actualizar el cliente
         $cliente = Cliente::findOrFail($id);
         $cliente->update([
             'Id_contacto' => $request->Id_contacto,
             'Direccion_cliente' => $request->Direccion_cliente,
         ]);
 
-        // Redirigir a la vista de clientes con un mensaje de éxito
         return redirect()->route('clientes.index')->with('success', 'Cliente actualizado exitosamente.');
     }
 
     public function destroy($id)
     {
-        // Eliminar el cliente por id
         $cliente = Cliente::findOrFail($id);
         $cliente->delete();
 
-        // Redirigir con un mensaje de éxito
         return redirect()->route('clientes.index')->with('success', 'Cliente eliminado exitosamente.');
     }
 }

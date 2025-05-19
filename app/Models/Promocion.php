@@ -13,15 +13,15 @@ class Promocion extends Model
 
     protected $table = 'promociones';
     protected $primaryKey = 'Id_promocion';
-    public $timestamps = true; // 🔹 Desactiva timestamps
+    public $timestamps = true; //
     protected $fillable = [
         'Nombre',
         'Descripcion',
         'Descuento',
         'Fecha_inicio',
         'Fecha_final',
-        'Imagen',   // Agregar Imagen al fillable
-        'Alt_imagen' // Agregar Alt_imagen al fillable
+        'Imagen',
+        'Alt_imagen'
     ];
 }
 

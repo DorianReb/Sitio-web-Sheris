@@ -56,7 +56,6 @@
                 <div class="text-center mt-4">
                     <a href="{{ route('productos.todos') }}" class="btn btn-morena text-light fw-bold">Ver todos los productos</a>
                 </div>
-
         </div>
     </section>
 
