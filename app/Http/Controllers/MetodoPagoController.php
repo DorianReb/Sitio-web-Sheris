@@ -22,11 +22,11 @@ class MetodoPagoController extends Controller
     {
 
         $request->validate([
-            'Metodo' => 'required|string|max:255|unique:metodo_pago,Metodo',
+            'metodo' => 'required|string|max:255|unique:metodo_pago,metodo',
         ]);
 
         MetodoPago::create([
-            'Metodo' => $request->Metodo,
+            'metodo' => $request->metodo,
         ]);
 
         return redirect()->route('metodo_pago.index')->with('success', 'Método de pago creado correctamente.');
@@ -39,9 +39,9 @@ class MetodoPagoController extends Controller
     }
 
 
-    public function edit($Id_metodo_pago)
+    public function edit($id_metodo_pago)
     {
-        $metodo_pago = MetodoPago::findOrFail($Id_metodo_pago);
+        $metodo_pago = MetodoPago::findOrFail($id_metodo_pago);
         return view('metodo_pago.edit', compact('metodo_pago'));
     }
 
@@ -50,7 +50,7 @@ class MetodoPagoController extends Controller
     {
 
         $request->validate([
-            'Metodo' => 'required|unique:metodo_pago,Metodo,' . $id_metodo_pago . ',Id_metodo_pago'
+            'metodo' => 'required|unique:metodo_pago,Metodo,' . $id_metodo_pago . ',id_metodo_pago'
         ]);
 
         // Obtener el método de pago a actualizar
@@ -58,7 +58,7 @@ class MetodoPagoController extends Controller
 
         // Actualizar los datos del método de pago
         $metodo_pago->update([
-            'Metodo' => $request->Metodo,
+            'metodo' => $request->metodo,
         ]);
 
         return redirect()->route('metodo_pago.index')->with('success', 'Método de pago actualizado correctamente.');

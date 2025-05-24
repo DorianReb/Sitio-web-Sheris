@@ -21,15 +21,15 @@ class PuestoController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'Nombre' => 'required|string|max:255|unique:puestos,Nombre',
-            'Descripcion' => 'required|string|max:255',
-            'Salario_base' => 'required|numeric|min:0',
+            'nombre' => 'required|string|max:255|unique:puestos,nombre',
+            'descripcion' => 'required|string|max:255',
+            'salario_base' => 'required|numeric|min:0',
         ]);
 
         Puesto::create([
-            'Nombre' => $request->Nombre,
-            'Descripcion' => $request->Descripcion,
-            'Salario_base' => $request->Salario_base,
+            'nombre' => $request->nombre,
+            'descripcion' => $request->descripcion,
+            'salario_base' => $request->salario_base,
         ]);
 
         return redirect()->route('puestos.index')->with('success', 'Puesto creado correctamente.');
@@ -49,17 +49,17 @@ class PuestoController extends Controller
     public function update(Request $request, $id_puesto)
     {
         $request->validate([
-            'Nombre' => 'required|string|max:255|unique:puestos,Nombre,' . $id_puesto . ',Id_puesto',
-            'Descripcion' => 'required|string|max:255',
-            'Salario_base' => 'required|numeric|min:0',
+            'nombre' => 'required|string|max:255|unique:puestos,nombre,' . $id_puesto . ',id_puesto',
+            'descripcion' => 'required|string|max:255',
+            'salario_base' => 'required|numeric|min:0',
         ]);
 
         $puesto = Puesto::findOrFail($id_puesto);
 
         $puesto->update([
-            'Nombre' => $request->Nombre,
-            'Descripcion' => $request->Descripcion,
-            'Salario_base' => $request->Salario_base,
+            'nombre' => $request->nombre,
+            'descripcion' => $request->descripcion,
+            'salario_base' => $request->salario_base,
         ]);
 
         return redirect()->route('puestos.index')->with('success', 'Puesto actualizado correctamente.');

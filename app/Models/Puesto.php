@@ -10,11 +10,11 @@ class Puesto extends Model
     use HasFactory;
 
     protected $table = 'puestos';
-    protected $primaryKey = 'Id_puesto';
-    protected $fillable = ['Nombre', 'Descripcion', 'Salario_base'];
+    protected $primaryKey = 'id_puesto';
+    protected $fillable = ['nombre', 'descripcion', 'salario_base'];
 
     public function empleados()
     {
-        return $this->hasMany(Empleado::class, 'Id_puesto');
+        return $this->hasMany(Empleado::class, 'id_puesto');
     }
 }

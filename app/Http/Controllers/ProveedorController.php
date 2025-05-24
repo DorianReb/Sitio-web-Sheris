@@ -30,15 +30,15 @@ class ProveedorController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'Nombre' => 'required|string|max:255',
-            'Direccion' => 'nullable|string|max:255',
+            'nombre' => 'required|string|max:255',
+            'direccion' => 'nullable|string|max:255',
         ]);
 
 
         //Creacion de la categoria
         Proveedor::create([
-            'Nombre' => $request->Nombre,
-            'Direccion' => $request->Direccion,
+            'nombre' => $request->nombre,
+            'direccion' => $request->direccion,
         ]);
         return redirect()->route('proveedores.index')->with('success', 'Proveedor creado exitosamente.');
     }
@@ -66,15 +66,15 @@ class ProveedorController extends Controller
     public function update(Request $request, Proveedor $Id_proveedor)
     {
         $request->validate([
-            'Nombre' => 'required|string|max:255',
-            'Direccion' => 'nullable|string|max:255',
+            'nombre' => 'required|string|max:255',
+            'direccion' => 'nullable|string|max:255',
         ]);
 
         $proveedor = Proveedor::findOrFail($Id_proveedor);
 
         $proveedor->update([
-            'Nombre' => $request->Nombre,
-            'Direccion' => $request->Direccion,
+            'nombre' => $request->nombre,
+            'direccion' => $request->direccion,
         ]);
 
         return redirect()->route('proveedores.index')->with('success', 'Proveedor actualizado exitosamente.');

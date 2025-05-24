@@ -12,14 +12,14 @@ class EstadoReparto extends Model
     use softDeletes;
 
     protected $table = 'estado_reparto';
-    protected $primaryKey = 'Id_estado';
-    protected $fillable = ['Estado'];
+    protected $primaryKey = 'id_estado';
+    protected $fillable = ['estado'];
 
 
     public const ESTADOS = [
-        'En tránsito',
-        'Entregado',
-        'Pendiente',
+        'en tránsito',
+        'entregado',
+        'pendiente',
     ];
 
     public $timestamps = false;

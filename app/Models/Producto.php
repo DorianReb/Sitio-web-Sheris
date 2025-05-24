@@ -12,22 +12,36 @@ class Producto extends Model
     use SoftDeletes;
 
     protected $table = 'productos';
-    protected $primaryKey = 'Id_producto';
+    protected $primaryKey = 'id_producto';
     protected $fillable = [
-        'Nombre', 'Descripcion', 'Imagen', 'Alt_imagen',
-        'Precio', 'Stock', 'Id_categoria', 'Fecha_alta'
+        'nombre', 'descripcion', 'imagen', 'alt_imagen',
+        'precio', 'stock', 'id_categoria', 'fecha_alta'
     ];
 
     public $timestamps = true;
 
     public function categoria()
     {
-        return $this->belongsTo(Categoria::class, 'Id_categoria');
+        return $this->belongsTo(Categoria::class, 'id_categoria');
     }
 
     public function proveedores()
     {
-        return $this->belongsToMany(Proveedor::class, 'producto_proveedor', 'Id_producto', 'Id_proveedor')
-                    ->withPivot('Precio_venta', 'Stock_disponible');
+        return $this->belongsToMany(Proveedor::class, 'producto_proveedor', 'id_producto', 'id_proveedor')
+                    ->withPivot('precio_venta', 'stock_disponible');
     }
+    public function detalles()
+    {
+        return $this->hasMany(DetalleVenta::class, 'id_producto');
+    }
+
+    public function promociones()
+    {
+        return $this->belongsToMany(Promocion::class, 'asignapromocion', 'id_producto', 'id_promocion')
+            ->withTimestamps()
+            ->withPivot('id_asignapromo')
+            ->whereNull('asignapromocion.deleted_at');
+    }
+
+
 }

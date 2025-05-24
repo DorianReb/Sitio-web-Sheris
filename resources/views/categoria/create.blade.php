@@ -17,13 +17,13 @@
             <form action="{{ route('categorias.store') }}" method="POST">
                 @csrf
                 <div class="mb-3">
-                    <label for="Nombre" class="form-label">Nombre</label>
-                    <input type="text" class="form-control" id="Nombre" name="Nombre" required>
+                    <label for="nombre" class="form-label">nombre</label>
+                    <input type="text" class="form-control" id="nombre" name="nombre" required>
                 </div>
 
                 <div class="mb-3">
-                    <label for="Descripcion" class="form-label">Descripción</label>
-                    <input type="text" class="form-control" id="Descripcion" name="Descripcion" required>
+                    <label for="descripcion" class="form-label">descripción</label>
+                    <input type="text" class="form-control" id="descripcion" name="descripcion" required>
                 </div>
 
                 <button type="submit" class="btn btn-primary">Guardar</button>

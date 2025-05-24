@@ -57,7 +57,38 @@
                 </li>
 
                 <li class="nav-item"><a class="nav-link text-light fw-bold" href="{{ route('promociones.index') }}"><i class="fa-solid fa-gift"></i>
-                        Promociones</a></li>
+                        Promociones</a>
+                </li>
+
+
+                <!-- Nuevos Botones -->
+                <li class="nav-item">
+                    <a class="nav-link text-light fw-bold" href="{{ route('empleados.index') }}">
+                        <i class="fa-solid fa-user-tie"></i> Empleados
+                    </a>
+                </li>
+
+                {{--}}
+                <li class="nav-item">
+                    <a class="nav-link text-light fw-bold" href="{{ route('clientes.index') }}">
+                        <i class="fa-solid fa-user"></i> Clientes
+                    </a>
+                </li>
+                {{--}}
+                <li class="nav-item">
+                    <a class="nav-link text-light fw-bold" href="{{ route('asignapromocion.index') }}">
+                        <i class="fa-solid fa-tags"></i> Asignar Promociones
+                    </a>
+                </li>
+
+                {{--}}
+                <li class="nav-item">
+                    <a class="nav-link text-light fw-bold" href="{{ route('ventas.index') }}">
+                        <i class="fa-solid fa-shopping-cart"></i> Ventas
+                    </a>
+                </li>
+                {{--}}
+
             </ul>
 
             <!-- Botón de regresar al Landing Page -->

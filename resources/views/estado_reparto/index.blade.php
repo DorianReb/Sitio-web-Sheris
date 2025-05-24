@@ -4,7 +4,7 @@
     <div class="row justify-content-center">
         <div class="col-8">
             <h1 class="alert alert-success">Estados de Reparto</h1>
-            <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#formModal">
+            <button type="button" class="btn btn-success shadow-sm rounded-pill" data-bs-toggle="modal" data-bs-target="#formModal">
                 <i class="fa-solid fa-plus"></i> Agregar Estado
             </button>
         </div>
@@ -21,7 +21,7 @@
     <div class="row justify-content-center mt-5">
         <div class="col-8">
             <table class="table table-striped table-hover">
-                <thead>
+                <thead class="table-dark rounded-top">
                 <tr>
                     <th>ID</th>
                     <th>Nombre</th>
@@ -32,44 +32,51 @@
                 @foreach ($estados as $estado)
                     <tr>
                         <td>{{$loop->index + 1}}</td>
-                        <td>{{ $estado->Estado}}</td>
+                        <td>{{ $estado->estado}}</td>
                         <td>
                             <!-- Botón Editar -->
-                            <a class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#editModal{{ $estado->Id_estado }}">
+                            <a class="btn btn-warning shadow-sm rounded-pill" data-bs-toggle="modal" data-bs-target="#editModal{{ $estado->Id_estado }}">
                                 <i class="fa-solid fa-pen-to-square"></i> Editar
                             </a>
                             <!-- Formulario Eliminar -->
-                            <form action="{{ route('estado_reparto.destroy', $estado->Id_estado) }}" method="POST" style="display:inline;">
+                            <form action="{{ route('estado_reparto.destroy', $estado->id_estado) }}" method="POST" style="display:inline;">
                                 @csrf
                                 @method('DELETE')
-                                <button class="btn btn-danger" type="submit"><i class="fa-solid fa-trash"></i> Eliminar</button>
+                                <button class="btn btn-danger shadow-sm rounded-pill" type="submit"><i class="fa-solid fa-trash"></i> Eliminar</button>
                             </form>
 
                         </td>
                     </tr>
 
                     <!-- Modal Edición -->
-                    <div class="modal fade" id="editModal{{ $estado->Id_estado }}" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
+                    <div class="modal fade" id="editModal{{ $estado->id_estado }}" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
                         <div class="modal-dialog">
                             <div class="modal-content">
-                                <div class="modal-header">
+                                <div class="modal-header bg-warning text-dark">
                                     <h5 class="modal-title">Editar Estado</h5>
                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
                                 </div>
                                 <div class="modal-body">
-                                    <form action="{{ route('estado_reparto.update', $estado->Id_estado) }}" method="POST">
+                                    <form action="{{ route('estado_reparto.update', $estado->id_estado) }}" method="POST">
                                         @csrf
                                         @method('PUT')
                                         <div class="mb-3">
-                                            <label for="Estado" class="form-label">Estado</label>
-                                            <select class="form-control" id="Estado" name="Estado" required>
+                                            <label for="estado" class="form-label">Estado</label>
+                                            <select class="form-control" id="estado" name="estado" required>
                                                 @foreach(\App\Models\EstadoReparto::ESTADOS as $estadoValue)
-                                                    <option value="{{ $estadoValue }}" {{ $estadoValue == $estado->Estado ? 'selected' : '' }}>{{ $estadoValue }}</option>
+                                                    <option value="{{ $estadoValue }}" {{ $estadoValue == $estado->estado ? 'selected' : '' }}>{{ $estadoValue }}</option>
                                                 @endforeach
 
                                             </select>
                                         </div>
-                                        <button type="submit" class="btn btn-primary">Actualizar</button>
+                                        <div class="modal-footer">
+                                            <button type="submit" class="btn btn-warning">
+                                                <i class="fa-solid fa-check"></i> Actualizar
+                                            </button>
+                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                                                <i class="fa-solid fa-xmark"></i> Cancelar
+                                            </button>
+                                        </div>
                                     </form>
 
                                 </div>
@@ -86,7 +93,7 @@
     <div class="modal fade" id="formModal" tabindex="-1" aria-labelledby="formModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
-                <div class="modal-header">
+                <div class="modal-header bg-success text-white">
                     <h5 class="modal-title">Agregar Estado de Reparto</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
                 </div>
@@ -101,7 +108,14 @@
                                 @endforeach
                             </select>
                         </div>
-                        <button type="submit" class="btn btn-primary">Guardar</button>
+                        <div class="modal-footer">
+                            <button type="submit" class="btn btn-success">
+                                <i class="fa-solid fa-check"></i> Guardar
+                            </button>
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                                <i class="fa-solid fa-xmark"></i> Cancelar
+                            </button>
+                        </div>
                     </form>
                 </div>
             </div>
