@@ -30,19 +30,19 @@ class PromocionController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'Nombre' => 'required|string|max:255',
-            'Descripcion' => 'nullable|string',
-            'Descuento' => 'required|numeric|min:0|max:75',
-            'Fecha_inicio' => 'required|date',
-            'Fecha_final' => 'required|date|after_or_equal:Fecha_inicio',
-            'Imagen' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
-            'Alt_imagen' => 'nullable|string|max:255',
+            'nombre' => 'required|string|max:255',
+            'descripcion' => 'nullable|string',
+            'descuento' => 'required|numeric|min:0|max:75',
+            'fecha_inicio' => 'required|date',
+            'fecha_final' => 'required|date|after_or_equal:fecha_inicio',
+            'imagen' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'alt_imagen' => 'nullable|string|max:255',
         ]);
 
         $data = $request->all();
 
-        if ($request->hasFile('Imagen')) {
-            $path = $request->file('Imagen')->store('promociones', 'public');
+        if ($request->hasFile('imagen')) {
+            $path = $request->file('imagen')->store('promociones', 'public');
             $data['Imagen'] = $path;
         }
 
@@ -67,25 +67,25 @@ class PromocionController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'Nombre' => 'required|string|max:255',
-            'Descripcion' => 'nullable|string',
-            'Imagen' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
-            'Alt_imagen' => 'nullable|string|max:255',
-            'Descuento' => 'required|numeric|min:0|max:100',
-            'Fecha_inicio' => 'required|date',
-            'Fecha_final' => 'required|date|after_or_equal:Fecha_inicio',
+            'nombre' => 'required|string|max:255',
+            'descripcion' => 'nullable|string',
+            'imagen' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'alt_imagen' => 'nullable|string|max:255',
+            'descuento' => 'required|numeric|min:0|max:100',
+            'fecha_inicio' => 'required|date',
+            'fecha_final' => 'required|date|after_or_equal:fecha_inicio',
         ]);
 
         $promocion = Promocion::findOrFail($id);
         $data = $request->all();
 
-        if ($request->hasFile('Imagen')) {
-            $path = $request->file('Imagen')->store('promociones', 'public');
-            $data['Imagen'] = $path;
+        if ($request->hasFile('imagen')) {
+            $path = $request->file('imagen')->store('promociones', 'public');
+            $data['imagen'] = $path;
         }
 
-        if ($request->has('Alt_imagen')) {
-            $data['Alt_imagen'] = $request->Alt_imagen;
+        if ($request->has('alt_imagen')) {
+            $data['alt_imagen'] = $request->alt_imagen;
         }
 
         // Actualizar la promoción

@@ -22,13 +22,13 @@ class ContactoController extends Controller
     {
 
         $request->validate([
-            'Correo' => 'required|email|unique:contactos,Correo',
-            'Telefono' => 'required|numeric',
+            'correo' => 'required|email|unique:contactos,Correo',
+            'telefono' => 'required|numeric',
         ]);
 
         Contacto::create([
-            'Correo' => $request->Correo,
-            'Telefono' => $request->Telefono,
+            'correo' => $request->correo,
+            'telefono' => $request->telefono,
         ]);
 
         return redirect()->route('contactos.index')->with('success', 'Contacto creado correctamente.');
@@ -49,15 +49,15 @@ class ContactoController extends Controller
     public function update(Request $request, $id_contacto)
     {
         $request->validate([
-            'Correo' => 'required|email|unique:contactos,Correo,' . $id_contacto . ',Id_contacto',
-            'Telefono' => 'required|numeric',
+            'correo' => 'required|email|unique:contactos,Correo,' . $id_contacto . ',id_contacto',
+            'telefono' => 'required|numeric',
         ]);
 
         $contacto = Contacto::findOrFail($id_contacto);
 
         $contacto->update([
-            'Correo' => $request->Correo,
-            'Telefono' =>$request->Telefono,
+            'correo' => $request->correo,
+            'telefono' =>$request->telefono,
         ]);
         return redirect()->route('contactos.index')->with('success', 'Contacto actualizado correctamente.');
     }

@@ -5,6 +5,8 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\CategoriaController;
 use App\Http\Controllers\WelcomeController;
+use App\Http\Controllers\AsignaPromocionController;
+
 
 
 Route::get('/', [App\Http\Controllers\WelcomeController::class, 'index'])->name('welcome');
@@ -47,7 +49,12 @@ Route::resource('usuarios', App\Http\Controllers\UsuarioController::class);
 
 Route::resource('ventas', App\Http\Controllers\VentaController::class);
 
+Route::resource('asignapromocion', App\Http\Controllers\AsignaPromocionController::class);
+
 Route::get('/productos-cliente', [ProductoController::class, 'mostrarTodos'])->name('productos.todos');
+
+Route::get('/promociones/{id}/productos', [App\Http\Controllers\AsignaPromocionController::class, 'verProductos'])->name('promocion.productos');
+
 
 Auth::routes();
 

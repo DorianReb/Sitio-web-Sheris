@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Contacto;
 use App\Models\Empleado;
+use App\Models\Puesto;
 use Illuminate\Http\Request;
 
 class EmpleadoController extends Controller
@@ -13,6 +15,13 @@ class EmpleadoController extends Controller
     public function index()
     {
         //
+        $empleados = Empleado::with('puesto','contacto')->get();
+        $puestos = Puesto::all();
+        $contactos = Contacto::all();
+        return view('empleado.index', compact('empleados','puestos', 'contactos'));
+
+
+
     }
 
     /**
@@ -20,7 +29,9 @@ class EmpleadoController extends Controller
      */
     public function create()
     {
-        //
+        $puestos = Puesto::all();
+        $contactos = Contacto::all();
+        return view('empleado.create', compact('puestos', 'contactos'));
     }
 
     /**
@@ -28,8 +39,27 @@ class EmpleadoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'nombre' => 'required|string|max:255',
+            'apellido_p' => 'required|string|max:255',
+            'apellido_m' => 'required|string|max:255',
+            'RFC' => 'required|string|max:255|unique:empleados',
+            'id_puesto' => 'required|exists:puestos,id_puesto',
+            'id_contacto' => 'required|exists:contactos,id_contacto',
+        ]);
+
+        Empleado::create([
+            'nombre' => $request->nombre,
+            'apellido_p' => $request->apellido_p,
+            'apellido_m' => $request->apellido_m,
+            'RFC' => $request->RFC,
+            'id_puesto' => $request->id_puesto,
+            'id_contacto' => $request->id_contacto
+        ]);
+
+        return redirect()->route('empleados.index')->with('status', 'Empleado registrado exitosamente');
     }
+
 
     /**
      * Display the specified resource.
@@ -45,6 +75,10 @@ class EmpleadoController extends Controller
     public function edit(Empleado $empleado)
     {
         //
+        $puestos = Puesto::all();
+        $contactos = Contacto::all();
+        return view('empleado.edit', compact('empleado', 'puestos', 'contactos'));
+
     }
 
     /**
@@ -53,6 +87,20 @@ class EmpleadoController extends Controller
     public function update(Request $request, Empleado $empleado)
     {
         //
+        $request->validate([
+            'nombre' => 'required|string|max:255',
+            'apellido_p' => 'required|string|max:255',
+            'apellido_m' => 'required|string|max:255',
+            'RFC' => 'required|string|max:255',
+            'id_puesto' => 'required|exists:puestos,Id_puesto',
+            'id_contacto' => 'required|exists:contactos,Id_contacto',
+        ]);
+
+        $data = $request->all();
+        $empleado->update($data);
+
+
+        return redirect()->route('empleados.index');
     }
 
     /**
@@ -61,5 +109,7 @@ class EmpleadoController extends Controller
     public function destroy(Empleado $empleado)
     {
         //
+        $empleado->delete();
+        return redirect()->route('empleados.index')->with('status', 'Empleado despedido exitosamente');
     }
 }

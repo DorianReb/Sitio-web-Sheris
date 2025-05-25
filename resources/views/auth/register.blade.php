@@ -1,11 +1,11 @@
-@extends('layouts.app')
+@extends('layouts.navbar_landing_page')
 
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header bg-morena">{{ __('Register') }}</div>
+                <div class="card-header text-light fw-bold bg-morena">{{ __('Register') }}</div>
 
                 <div class="card-body">
                     <form method="POST" action="{{ route('register') }}">

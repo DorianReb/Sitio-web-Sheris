@@ -42,13 +42,13 @@
                 <div class="col-md-4">
                     <div class="card h-100 shadow">
                         <div class="d-flex align-items-center justify-content-center" style="height: 250px; overflow: hidden;">
-                            <img src="{{ asset('storage/' . $producto->Imagen) }}" class="w-100 h-auto" alt="{{ $producto->Alt_imagen ?? $producto->Nombre }}">
+                            <img src="{{ asset('storage/' . $producto->imagen) }}" class="w-100 h-auto" alt="{{ $producto->alt_imagen ?? $producto->nombre }}">
                         </div>
                         <div class="card-body d-flex flex-column text-center">
-                            <h5 class="card-title fw-bold text-morena">{{ $producto->Nombre }}</h5>
-                            <p class="card-text">{{ $producto->Descripcion }}</p>
-                            <p class="card-text fw-bold">${{ number_format($producto->Precio, 2) }} MXN</p>
-                            <a href="#" class="btn btn-light text-morena mt-auto">Ver Producto</a>
+                            <h5 class="card-title fw-bold text-morena">{{ $producto->nombre }}</h5>
+                            <p class="card-text">{{ $producto->descripcion }}</p>
+                            <p class="card-text fw-bold">${{ number_format($producto->precio, 2) }} MXN</p>
+                            <a href="{{ route('productos.show', $producto->id_producto) }}" class="btn btn-light text-morena mt-auto">Ver Producto</a>
                         </div>
                     </div>
                 </div>
@@ -70,17 +70,17 @@
                     <div class="col-md-4">
                         <div class="card h-100 text-center">
                             <!-- Imagen de la promoción -->
-                            <img src="{{ asset('storage/' . $promocion->Imagen) }}" class="card-img-top img-fluid" alt="Promoción {{ $promocion->Nombre }}" style="height: 250px; object-fit: cover;">
+                            <img src="{{ asset('storage/' . $promocion->imagen) }}" class="card-img-top img-fluid" alt="Promoción {{ $promocion->nombre }}" style="height: 250px; object-fit: cover;">
                             <div class="card-body d-flex flex-column">
                                 <!-- Nombre de la promoción -->
-                                <h5 class="card-title text-morena fw-bold">{{ $promocion->Nombre }}</h5>
+                                <h5 class="card-title text-morena fw-bold">{{ $promocion->nombre }}</h5>
                                 <!-- Descripción de la promoción -->
-                                <p class="card-text flex-grow-1">{{ $promocion->Descripcion }}</p>
+                                <p class="card-text flex-grow-1">{{ $promocion->descripcion }}</p>
                                 <!-- Precio y descuento -->
-                                <p class="card-text fw-bold">Descuento: {{ $promocion->Descuento }}%</p>
-                                <p class="card-text text-muted">Válida desde: {{ \Carbon\Carbon::parse($promocion->Fecha_inicio)->format('d/m/Y') }} hasta: {{ \Carbon\Carbon::parse($promocion->Fecha_final)->format('d/m/Y') }}</p>
+                                <p class="card-text fw-bold">Descuento: {{ $promocion->descuento }}%</p>
+                                <p class="card-text text-muted">Válida desde: {{ \Carbon\Carbon::parse($promocion->fecha_inicio)->format('d/m/Y') }} hasta: {{ \Carbon\Carbon::parse($promocion->fecha_final)->format('d/m/Y') }}</p>
                                 <!-- Enlace para ver más detalles (puedes redirigir a una página específica si lo deseas) -->
-                                <a href="#" class="btn btn-light text-morena mt-auto">Ver Promoción</a>
+                                <a href="{{ route('promocion.productos', $promocion->id_promocion) }}" class="btn btn-light text-morena mt-auto">Ver Promoción</a>
                             </div>
                         </div>
                     </div>

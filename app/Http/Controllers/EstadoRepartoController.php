@@ -22,11 +22,11 @@ class EstadoRepartoController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'Estado' => 'required|string|in:' . implode(',', EstadoReparto::ESTADOS),
+            'estado' => 'required|string|in:' . implode(',', EstadoReparto::ESTADOS),
         ]);
 
         EstadoReparto::create([
-            'Estado' => $request->Estado,
+            'estado' => $request->Estado,
         ]);
 
         return redirect()->route('estado_reparto.index')->with('success', 'Estado de reparto creado correctamente');
@@ -46,13 +46,13 @@ class EstadoRepartoController extends Controller
     public function update(Request $request, $id_estado)
     {
         $request->validate([
-            'Estado' => 'required|string|in:' . implode(',', EstadoReparto::ESTADOS),
+            'estado' => 'required|string|in:' . implode(',', EstadoReparto::ESTADOS),
         ]);
 
         $estado = EstadoReparto::findOrFail($id_estado);
 
         $estado->update([
-            'Estado' => $request->Estado,
+            'estado' => $request->estado,
         ]);
 
         return redirect()->route('estado_reparto.index')->with('success', 'Estado de reparto actualizado correctamente');

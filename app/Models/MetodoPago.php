@@ -13,11 +13,11 @@ class MetodoPago extends Model
 
     protected $table = 'metodo_pago';
     protected $primaryKey = 'Id_metodo_pago';
-    protected $fillable = ['Metodo'];
+    protected $fillable = ['metodo'];
     public $timestamps = false;
 
     public function pagos()
     {
-        return $this->hasMany(Pago::class, 'Id_metodo_pago');
+        return $this->hasMany(Pago::class, 'id_metodo_pago');
     }
 }

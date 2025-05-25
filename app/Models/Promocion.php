@@ -12,16 +12,25 @@ class Promocion extends Model
     use SoftDeletes;
 
     protected $table = 'promociones';
-    protected $primaryKey = 'Id_promocion';
+    protected $primaryKey = 'id_promocion';
     public $timestamps = true; //
     protected $fillable = [
-        'Nombre',
-        'Descripcion',
-        'Descuento',
-        'Fecha_inicio',
-        'Fecha_final',
-        'Imagen',
-        'Alt_imagen'
+        'nombre',
+        'descripcion',
+        'descuento',
+        'fecha_inicio',
+        'fecha_final',
+        'imagen',
+        'alt_imagen'
     ];
+
+    public function productos()
+    {
+        return $this->belongsToMany(Producto::class, 'asignapromocion', 'id_promocion', 'id_producto')
+            ->withTimestamps()
+            ->withPivot('id_asignapromo')
+            ->whereNull('asignapromocion.deleted_at');
+    }
+
 }
 

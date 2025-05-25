@@ -24,14 +24,14 @@ class CategoriaController extends Controller
     {
 
         $request->validate([
-            'Nombre' => 'required|string|max:255|unique:categorias,Nombre',
-            'Descripcion' => 'required|string|max:255',
+            'nombre' => 'required|string|max:255|unique:categorias,nombre',
+            'descripcion' => 'required|string|max:255',
         ]);
 
 
         Categoria::create([
-            'Nombre' => $request->Nombre,
-            'Descripcion' => $request->Descripcion,
+            'nombre' => $request->nombre,
+            'descripcion' => $request->descripcion,
         ]);
 
         // Retornar con un mensaje de éxito
@@ -53,16 +53,16 @@ class CategoriaController extends Controller
     {
 
         $request->validate([
-            'Nombre' => 'required|string|max:255|unique:categorias,Nombre,' . $id_categoria,
-            'Descripcion' => 'required|string|max:255',
+            'nombre' => 'required|string|max:255|unique:categorias,nombre,' . $id_categoria,
+            'descripcion' => 'required|string|max:255',
         ]);
 
 
         $categoria = Categoria::findOrFail($id_categoria);
 
         $categoria->update([
-            'Nombre' => $request->Nombre,
-            'Descripcion' => $request->Descripcion,
+            'nombre' => $request->nombre,
+            'descripcion' => $request->descripcion,
         ]);
 
         return redirect()->route('categorias.index')->with('success', 'Categoría actualizada correctamente');
@@ -73,6 +73,18 @@ class CategoriaController extends Controller
         $categoria = Categoria::findOrFail($id_categoria);
         $categoria->delete();
         return redirect()->route('categorias.index')->with('success', 'Categoría eliminada correctamente.');
+    }
+
+    public function dashboard()
+    {
+        $categorias = Categoria::withCount('productos')->get();
+        // 'productos' es la relación del modelo Categoria con Productos
+
+        // Prepara etiquetas y cantidades para las gráficas
+        $labels = $categorias->pluck('Nombre')->toArray();
+        $data = $categorias->pluck('productos_count')->toArray();
+
+        return view('home', compact('labels', 'data'));
     }
 
 

@@ -11,9 +11,9 @@ class ProductoController extends Controller
 {
     public function index()
     {
-        $productos = Producto::with('categoria', 'proveedores')->get();
-        $categorias = Categoria::all(); // Asegura que esta variable se pasa a la vista
-        $proveedores = Proveedor::all(); // También es útil para el select de proveedores en el modal de creación
+        $productos = Producto::with(['categoria', 'proveedores', 'promociones'])->get();
+        $categorias = Categoria::all();
+        $proveedores = Proveedor::all();
 
         return view('producto.index', compact('productos', 'categorias', 'proveedores'));
     }
@@ -25,6 +25,20 @@ class ProductoController extends Controller
         return view('producto.create', compact('categorias', 'proveedores'));
     }
 
+    public function show($id)
+    {
+        $producto = Producto::with(['categoria', 'proveedores', 'promociones'])->findOrFail($id);
+
+        $productosRelacionados = Producto::with(['promociones']) // si también quieres promociones aquí
+        ->where('id_categoria', $producto->id_categoria)
+            ->where('id_producto', '!=', $producto->id_producto)
+            ->take(4)
+            ->get();
+
+        return view('producto.show', compact('producto', 'productosRelacionados'));
+    }
+
+
     public function edit(Producto $producto)
     {
         $categorias = Categoria::all();
@@ -35,18 +49,17 @@ class ProductoController extends Controller
     public function update(Request $request, Producto $producto)
     {
         $request->validate([
-            'Nombre' => 'required|string|max:255',
-            'Descripcion' => 'nullable|string',
-            'Imagen' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
-            'Precio' => 'required|numeric|min:0',
-            'Stock' => 'required|integer|min:0',
-            'Id_categoria' => 'required|exists:categorias,Id_categoria',
-            'Fecha_alta' => 'required|date',
+            'nombre' => 'required|string|max:255',
+            'descripcion' => 'nullable|string',
+            'imagen' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'precio' => 'required|numeric|min:0',
+            'stock' => 'required|integer|min:0',
+            'id_categoria' => 'required|exists:categorias,id_categoria',
         ]);
 
         $data = $request->all();
 
-        if ($request->hasFile('Imagen')) {
+        if ($request->hasFile('imagen')) {
             $data['Imagen'] = $request->file('Imagen')->store('productos', 'public');
         }
 
@@ -62,30 +75,30 @@ class ProductoController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'Nombre' => 'required|string|max:255',
-            'Descripcion' => 'nullable|string',
-            'Precio' => 'required|numeric',
-            'Stock' => 'required|integer',
-            'Id_categoria' => 'required|exists:categorias,Id_categoria',
+            'nombre' => 'required|string|max:255',
+            'descripcion' => 'nullable|string',
+            'precio' => 'required|numeric',
+            'stock' => 'required|integer',
+            'id_categoria' => 'required|exists:categorias,Id_categoria',
             'imagen' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
         $producto = new Producto();
-        $producto->Nombre = $request->Nombre;
-        $producto->Descripcion = $request->Descripcion;
-        $producto->Precio = $request->Precio;
-        $producto->Stock = $request->Stock;
-        $producto->Id_categoria = $request->Id_categoria;
+        $producto->nombre = $request->nombre;
+        $producto->descripcion = $request->descripcion;
+        $producto->precio = $request->precio;
+        $producto->stock = $request->stock;
+        $producto->id_categoria = $request->id_categoria;
 
         // Subir la imagen si existe
         if ($request->hasFile('imagen')) {
             $imagePath = $request->file('imagen')->store('productos', 'public');
-            $producto->Imagen = $imagePath;
+            $producto->imagen = $imagePath;
         } else {
-            $producto->Imagen = null;
+            $producto->imagen = null;
         }
 
-        $producto->Alt_imagen = $request->alt_imagen;
+        $producto->alt_imagen = $request->alt_imagen;
 
         $producto->save();
 
@@ -101,17 +114,17 @@ class ProductoController extends Controller
 
     public function mostrarTodos(Request $request)
     {
-        $categorias = \App\Models\Categoria::all();
-        $query = \App\Models\Producto::query();
+        $categorias = Categoria::all();
+        $query = Producto::with(['categoria', 'proveedores', 'promociones']);
 
         if ($request->filled('categoria')) {
-            $query->where('Id_categoria', $request->categoria);
+            $query->where('id_categoria', $request->categoria);
         }
 
         if ($request->filled('buscar')) {
             $query->where(function ($q) use ($request) {
-                $q->where('Nombre', 'like', '%' . $request->buscar . '%')
-                    ->orWhere('Descripcion', 'like', '%' . $request->buscar . '%');
+                $q->where('nombre', 'like', '%' . $request->buscar . '%')
+                    ->orWhere('descripcion', 'like', '%' . $request->buscar . '%');
             });
         }
 

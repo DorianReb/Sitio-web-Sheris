@@ -4,7 +4,7 @@
     <div class="row justify-content-center">
         <div class="col-8">
             <h1 class="alert alert-success">Proveedores</h1>
-            <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#createModal">
+            <button type="button" class="btn btn-success shadow-sm rounded-pill" data-bs-toggle="modal" data-bs-target="#createModal">
                 <i class="fa-solid fa-plus"></i> Agregar Proveedor
             </button>
         </div>
@@ -20,8 +20,8 @@
 
     <div class="row justify-content-center mt-5">
         <div class="col-8">
-            <table class="table table-striped table-hover">
-                <thead>
+            <table class="table table-striped table-hover ">
+                <thead class="table-dark rounded-top">
                 <tr>
                     <th>ID</th>
                     <th>Nombre</th>
@@ -33,49 +33,56 @@
                 @foreach($proveedores as $proveedor)
                     <tr>
                         <td>{{$loop->index + 1}}</td>
-                        <td>{{ $proveedor->Nombre }}</td>
-                        <td>{{ $proveedor->Direccion }}</td>
+                        <td>{{ $proveedor->nombre }}</td>
+                        <td>{{ $proveedor->direccion }}</td>
                         <td>
                             <!-- Modal Editar -->
-                            <a class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#editModal{{ $proveedor->Id_proveedor }}">
+                            <a class="btn btn-warning shadow-sm rounded-pill" data-bs-toggle="modal" data-bs-target="#editModal{{ $proveedor->id_proveedor }}">
                                 <i class="fa-solid fa-pen-to-square"></i> Editar
                             </a>
 
                             <!-- Modal de eliminación -->
-                            <form action="{{ route('proveedores.destroy', $proveedor->Id_proveedor) }}" method="POST" style="display:inline;">
+                            <form action="{{ route('proveedores.destroy', $proveedor->id_proveedor) }}" method="POST" style="display:inline;">
                                 @csrf
                                 @method('DELETE')
-                                <button class="btn btn-danger" type="submit"><i class="fa-solid fa-trash"></i> Eliminar</button>
+                                <button class="btn btn-danger shadow-sm rounded-pill" type="submit"><i class="fa-solid fa-trash"></i> Eliminar</button>
                             </form>
                         </td>
                     </tr>
 
                     <!-- Modal de Edición -->
-                    <div class="modal fade" id="editModal{{ $proveedor->Id_proveedor }}" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
+                    <div class="modal fade" id="editModal{{ $proveedor->id_proveedor }}" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
                         <div class="modal-dialog">
                             <div class="modal-content">
-                                <div class="modal-header">
+                                <div class="modal-header bg-warning text-dark">
                                     <h5 class="modal-title" id="editModalLabel">Editar Proveedor</h5>
                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
                                 </div>
                                 <div class="modal-body">
-                                    <form action="{{ route('proveedores.update', $proveedor->Id_proveedor) }}" method="POST">
+                                    <form action="{{ route('proveedores.update', $proveedor->id_proveedor) }}" method="POST">
                                         @csrf
                                         @method('PUT')
 
                                         {{-- Campo Nombre --}}
                                         <div class="mb-3">
-                                            <label for="Nombre" class="form-label">Nombre</label>
-                                            <input type="text" class="form-control" id="Nombre" name="Nombre" value="{{ old('Nombre', $proveedor->Nombre) }}" required>
+                                            <label for="nombre" class="form-label">Nombre</label>
+                                            <input type="text" class="form-control" id="nombre" name="nombre" value="{{ old('nombre', $proveedor->nombre) }}" required>
                                         </div>
 
                                         {{-- Campo Dirección --}}
                                         <div class="mb-3">
-                                            <label for="Direccion" class="form-label">Dirección</label>
-                                            <input type="text" class="form-control" id="Direccion" name="Direccion" value="{{ old('Direccion', $proveedor->Direccion) }}" required>
+                                            <label for="direccion" class="form-label">Dirección</label>
+                                            <input type="text" class="form-control" id="direccion" name="direccion" value="{{ old('direccion', $proveedor->direccion) }}" required>
                                         </div>
 
-                                        <button type="submit" class="btn btn-success">Actualizar</button>
+                                        <div class="modal-footer">
+                                            <button type="submit" class="btn btn-warning">
+                                                <i class="fa-solid fa-check"></i> Actualizar
+                                            </button>
+                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                                                <i class="fa-solid fa-xmark"></i> Cancelar
+                                            </button>
+                                        </div>
                                     </form>
                                 </div>
                             </div>
@@ -91,7 +98,7 @@
     <div class="modal fade" id="createModal" tabindex="-1" aria-labelledby="createModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
-                <div class="modal-header">
+                <div class="modal-header bg-success text-white">
                     <h5 class="modal-title" id="createModalLabel">Formulario de Proveedor</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
                 </div>
@@ -99,15 +106,21 @@
                     <form action="{{ route('proveedores.store') }}" method="POST">
                         @csrf
                         <div class="mb-3">
-                            <label for="Nombre" class="form-label">Nombre</label>
-                            <input type="text" class="form-control" id="Nombre" name="Nombre" required>
+                            <label for="nombre" class="form-label">Nombre</label>
+                            <input type="text" class="form-control" id="nombre" name="nombre" required>
                         </div>
                         <div class="mb-3">
-                            <label for="Direccion" class="form-label">Dirección</label>
-                            <input type="text" class="form-control" id="Direccion" name="Direccion" required>
+                            <label for="direccion" class="form-label">Dirección</label>
+                            <input type="text" class="form-control" id="direccion" name="direccion" required>
                         </div>
-                        <button type="submit" class="btn btn-success">Guardar</button>
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                        <div class="modal-footer">
+                            <button type="submit" class="btn btn-success">
+                                <i class="fa-solid fa-check"></i> Guardar
+                            </button>
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                                <i class="fa-solid fa-xmark"></i> Cancelar
+                            </button>
+                        </div>
                     </form>
                 </div>
             </div>

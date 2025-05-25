@@ -12,8 +12,8 @@ class WelcomeController extends Controller
     {
         $productos = Producto::latest('created_at')->take(3)->get();
 
-        $promociones = Promocion::where('Fecha_inicio', '<=', Carbon::now())
-            ->where('Fecha_final', '>=', Carbon::now())
+        $promociones = Promocion::where('fecha_inicio', '<=', Carbon::now())
+            ->where('fecha_final', '>=', Carbon::now())
             ->latest('created_at')
             ->get();
 

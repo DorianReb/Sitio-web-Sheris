@@ -10,13 +10,13 @@ class Proveedor extends Model
     use HasFactory;
 
     protected $table = 'proveedores';
-    protected $primaryKey = 'Id_proveedor';
-    protected $fillable = ['Nombre', 'Direccion'];
+    protected $primaryKey = 'id_proveedor';
+    protected $fillable = ['nombre', 'direccion'];
     public $timestamps = false;
 
     public function productos()
     {
-        return $this->belongsToMany(Producto::class, 'producto_proveedor', 'Id_proveedor', 'Id_producto')
-                    ->withPivot('Precio_venta', 'Stock_disponible');
+        return $this->belongsToMany(Producto::class, 'producto_proveedor', 'id_proveedor', 'id_producto')
+                    ->withPivot('precio_venta', 'stock_disponible');
     }
 }

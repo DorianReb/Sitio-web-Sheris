@@ -12,17 +12,17 @@ class Contacto extends Model
     use SoftDeletes;
 
     protected $table = 'contactos';
-    protected $primaryKey = 'Id_contacto';
-    protected $fillable = ['Correo', 'Telefono'];
+    protected $primaryKey = 'id_contacto';
+    protected $fillable = ['correo', 'telefono'];
 
     public $timestamps = false;
     public function clientes()
     {
-        return $this->hasMany(Cliente::class, 'Id_contacto');
+        return $this->hasMany(Cliente::class, 'id_contacto');
     }
 
     public function empleados()
     {
-        return $this->hasMany(Empleado::class, 'Id_contacto');
+        return $this->hasMany(Empleado::class, 'id_contacto');
     }
 }

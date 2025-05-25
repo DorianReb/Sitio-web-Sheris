@@ -13,12 +13,12 @@ class Categoria extends Model
     use softDeletes;
 
 protected $table = 'categorias';
-protected $primaryKey = 'Id_categoria';
+protected $primaryKey = 'id_categoria';
     public $timestamps = false;
-protected $fillable = ['Nombre', 'Descripcion'];
+protected $fillable = ['nombre', 'descripcion'];
 
     public function productos()
     {
-        return $this->hasMany(Producto::class, 'id_categoria', 'Id_categoria');
+        return $this->hasMany(Producto::class, 'id_categoria', 'id_categoria');
     }
 }
