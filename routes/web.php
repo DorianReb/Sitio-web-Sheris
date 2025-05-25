@@ -49,6 +49,8 @@ Route::resource('usuarios', App\Http\Controllers\UsuarioController::class);
 
 Route::resource('ventas', App\Http\Controllers\VentaController::class);
 
+Route::resource('detalle_venta', App\Http\Controllers\DetalleVentaController::class);
+
 Route::resource('asignapromocion', App\Http\Controllers\AsignaPromocionController::class);
 
 Route::get('/productos-cliente', [ProductoController::class, 'mostrarTodos'])->name('productos.todos');

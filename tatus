@@ -1,0 +1,164 @@
+[33mcommit 6986931b1cf28d7acf8f7cec0993c04298493cee[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m)[m
+Author: Luis Roberto <L202307042@vbravo.tecnm.mx>
+Date:   Sun May 25 13:02:12 2025 -0600
+
+    Cambios en create y edit de contactos
+
+[33mcommit 965667cc67e6b92f72ea7a3c8bb21f90cf94bbf1[m
+Author: Luis Roberto <L202307042@vbravo.tecnm.mx>
+Date:   Sun May 25 12:56:08 2025 -0600
+
+    Cambios en create y edit de puesto
+
+[33mcommit ca39233ef5dff055eea2a9be2e82e86bf3de1c39[m
+Author: Luis Roberto <L202307042@vbravo.tecnm.mx>
+Date:   Sun May 25 12:24:53 2025 -0600
+
+    Cambios en create y edit de proveedores
+
+[33mcommit bc61bd7749adea85f888943578ca3ad480ef6551[m
+Author: Luis Roberto <L202307042@vbravo.tecnm.mx>
+Date:   Sun May 25 03:56:21 2025 -0600
+
+    Cambios en create y edit de puesto + nueva migración
+
+[33mcommit 83510b8caffd9545c98fe7c97ae6927bf8f6dcb5[m
+Merge: 4044d4e b8db30c
+Author: Luis Roberto <L202307042@vbravo.tecnm.mx>
+Date:   Sun May 25 03:53:28 2025 -0600
+
+    Resuelto conflicto en vista de puesto
+
+[33mcommit 4044d4e4bb419104cd2102ebeb8fa3bd9112b94e[m
+Author: Luis Roberto <L202307042@vbravo.tecnm.mx>
+Date:   Sun May 25 03:51:22 2025 -0600
+
+    Cambios locales en vista de puesto
+
+[33mcommit b8db30c0a147ad4fbd0e0a413ae34f6078301cbb[m
+Author: Diego Rebollar Cruz <L202308056@vbrabo.tecnm.mx>
+Date:   Fri May 23 22:53:31 2025 -0600
+
+    Nueva apariencia para los cruds, funcion show y asignapromociones (no se puede borrar)
+
+[33mcommit 4149dc285c858c6d4f2fd719424bf219c1e30062[m
+Author: Diego Rebollar Cruz <L202308056@vbrabo.tecnm.mx>
+Date:   Mon May 19 08:37:46 2025 -0600
+
+    Le movi al login, sorry
+
+[33mcommit 7332a0a6771a16225fc8bc540a6555e913479eba[m
+Author: Diego Rebollar Cruz <L202308056@vbrabo.tecnm.mx>
+Date:   Wed May 7 23:17:45 2025 -0600
+
+    Se ven los productos y promociones en el landing. Nuevo dashboard. Vista para ver los productos
+
+[33mcommit e933c3ce2abb790d9c866f907595257c16f1e51f[m
+Merge: 57dee21 e6b2341
+Author: Diego Rebollar Cruz <L202308056@vbrabo.tecnm.mx>
+Date:   Tue May 6 21:14:35 2025 -0600
+
+    Finalizar merge con origin/main
+
+[33mcommit 57dee21d8d044ee04af142ddca0006714dc16d9f[m
+Author: Diego Rebollar Cruz <L202308056@vbrabo.tecnm.mx>
+Date:   Sat May 3 15:00:46 2025 -0600
+
+    Ya se ven los productos y las promociones en el landing page
+
+[33mcommit e6b23415010f5e6c247e6b661fb32843d8e183e8[m
+Author: Alexis Malagon <alexismalagon2005@gmail.com>
+Date:   Sat Apr 5 09:55:14 2025 -0600
+
+    Eliminado repositorio Git interno de Sitio-web-Sheris
+
+[33mcommit 769008b258eedd1722bd06ba0c814d95d4da1005[m
+Author: Diego Rebollar Cruz <L202308056@vbrabo.tecnm.mx>
+Date:   Sat Apr 5 05:05:03 2025 -0600
+
+    Controladores funcionando, solo falta mostrarlos en la landing y en el dashboard
+
+[33mcommit 0d376912a63f185b1ed7cc8b96087f548eeababa[m
+Author: Luis Roberto <L202307042@vbravo.tecnm.mx>
+Date:   Thu Apr 3 11:35:18 2025 -0600
+
+    Cositas
+
+[33mcommit 89955db67b8c2e9ed05e4c1050f00e4900abf35f[m
+Author: Luis Roberto <L202307042@vbravo.tecnm.mx>
+Date:   Thu Apr 3 06:42:52 2025 -0600
+
+    Productos y proveedores
+
+[33mcommit 363bd1ce877a391d2b005b5b514a0868d0e09dbe[m
+Author: Alexis Malagon <alexismalagon2005@gmail.com>
+Date:   Thu Apr 3 04:38:02 2025 -0600
+
+    Agregadas nuevas migraciones para las tablas
+
+[33mcommit 27d3adaff8468e9fa63c9e90a51d8e222f45f154[m
+Author: Diego Rebollar Cruz <L202308056@vbrabo.tecnm.mx>
+Date:   Wed Apr 2 16:02:31 2025 -0600
+
+    Le puse iconos a los botones de editar y eliminar
+
+[33mcommit dbead688f80a52a2a49a667192a2a04b33f8501d[m
+Author: Diego Rebollar Cruz <L202308056@vbrabo.tecnm.mx>
+Date:   Tue Apr 1 23:54:03 2025 -0600
+
+    Menu para regresar a la vista de home implementado
+
+[33mcommit 76bf55af2872a30305e3325c3ec3ebad65b03ce8[m
+Author: Diego Rebollar Cruz <L202308056@vbrabo.tecnm.mx>
+Date:   Tue Apr 1 23:41:32 2025 -0600
+
+    Favicon
+
+[33mcommit a166132e5b0334324a2e35fe4f023ba6ef7ea039[m
+Merge: 805c317 efd6be3
+Author: Diego Rebollar Cruz <L202308056@vbrabo.tecnm.mx>
+Date:   Tue Apr 1 23:37:16 2025 -0600
+
+    Finalizando merge de origin/main
+
+[33mcommit 805c317c502430cad67566db5d7ee0d33675b950[m
+Author: Diego Rebollar Cruz <L202308056@vbrabo.tecnm.mx>
+Date:   Tue Apr 1 23:34:32 2025 -0600
+
+    Guardando cambios en navbar antes del pull
+
+[33mcommit efd6be333e1a8dc2904de5115d023617136694b8[m
+Author: Luis Roberto <L202307042@vbravo.tecnm.mx>
+Date:   Tue Apr 1 19:32:29 2025 -0600
+
+    Grud de Promociones completa
+
+[33mcommit 8ce947d1167439fa25c8f404fe0cc8b5e52390db[m
+Author: Luis Roberto <L202307042@vbravo.tecnm.mx>
+Date:   Tue Apr 1 17:32:01 2025 -0600
+
+    Dash e intento de model en categorias
+
+[33mcommit 1d342a233ca63ef121088645e41d10f446f5895a[m
+Author: Diego Rebollar Cruz <L202308056@vbrabo.tecnm.mx>
+Date:   Tue Apr 1 02:26:27 2025 -0600
+
+    Navbar del landing page y del dashboard
+
+[33mcommit 13e675d4f115262398746da50fd6dee10d8c40b5[m
+Author: Luis Roberto <L202307042@vbravo.tecnm.mx>
+Date:   Sun Mar 30 23:35:22 2025 -0600
+
+    Controllers, Models y Vistas de todas las tablas fuertes
+
+[33mcommit baaa38f4c199c39c71887beade9317d2a1a534e4[m
+Author: Diego Rebollar Cruz <L202308056@vbrabo.tecnm.mx>
+Date:   Sun Mar 30 19:06:09 2025 -0600
+
+    Intente hacer lo de Categorias
+
+[33mcommit 2d492cd5e396d000a9249efc48043689dd57ed8c[m
+Author: Diego Rebollar Cruz <L202308056@vbrabo.tecnm.mx>
+Date:   Sat Mar 29 16:54:54 2025 -0600
+
+    Subiendo el proyecto Laravel
