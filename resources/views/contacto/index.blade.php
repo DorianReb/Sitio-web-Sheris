@@ -23,7 +23,7 @@
             <table class="table table-striped table-hover">
                 <thead class="table-dark rounded-top">
                 <tr>
-                    <th>ID</th>
+                    <th>id_contacto</th>
                     <th>Correo</th>
                     <th>Teléfono</th>
                     <th>Acciones</th>
