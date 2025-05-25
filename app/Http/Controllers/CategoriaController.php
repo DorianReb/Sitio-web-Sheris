@@ -4,16 +4,16 @@ namespace App\Http\Controllers;
 
 use App\Models\Categoria;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 
 class CategoriaController extends Controller
 {
     // Muestra todas las categorías
     public function index()
-        {
-            $categorias = Categoria::all();
-            return view('categoria.index', compact('categorias'));
-        }
-
+    {
+        $categorias = Categoria::all();
+        return view('categoria.index', compact('categorias'));
+    }
 
     public function create()
     {
@@ -22,19 +22,22 @@ class CategoriaController extends Controller
 
     public function store(Request $request)
     {
-
+        // Como $id_categoria no existe en store, no debe usarse en ignore()
         $request->validate([
-            'nombre' => 'required|string|max:255|unique:categorias,nombre',
+            'nombre' => [
+                'required',
+                'string',
+                'max:255',
+                Rule::unique('categorias', 'nombre'), // No uses ignore aquí, es para update
+            ],
             'descripcion' => 'required|string|max:255',
         ]);
-
 
         Categoria::create([
             'nombre' => $request->nombre,
             'descripcion' => $request->descripcion,
         ]);
 
-        // Retornar con un mensaje de éxito
         return redirect()->route('categorias.index')->with('success', 'Categoría creada correctamente');
     }
 
@@ -51,12 +54,15 @@ class CategoriaController extends Controller
 
     public function update(Request $request, $id_categoria)
     {
-
         $request->validate([
-            'nombre' => 'required|string|max:255|unique:categorias,nombre,' . $id_categoria,
+            'nombre' => [
+                'required',
+                'string',
+                'max:255',
+                Rule::unique('categorias', 'nombre')->ignore($id_categoria, 'id_categoria'),
+            ],
             'descripcion' => 'required|string|max:255',
         ]);
-
 
         $categoria = Categoria::findOrFail($id_categoria);
 
@@ -78,14 +84,12 @@ class CategoriaController extends Controller
     public function dashboard()
     {
         $categorias = Categoria::withCount('productos')->get();
-        // 'productos' es la relación del modelo Categoria con Productos
 
-        // Prepara etiquetas y cantidades para las gráficas
-        $labels = $categorias->pluck('Nombre')->toArray();
+        // Aquí debes usar el nombre correcto del campo, que según tu modelo es 'nombre' (todo en minúsculas)
+        $labels = $categorias->pluck('nombre')->toArray();
         $data = $categorias->pluck('productos_count')->toArray();
 
         return view('home', compact('labels', 'data'));
     }
-
-
 }
+

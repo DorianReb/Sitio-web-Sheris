@@ -23,12 +23,12 @@
             <table class="table table-striped table-hover">
                 <thead>
                 <tr>
-                    <th>ID</th>
-                    <th>Nombre Completo</th>
-                    <th>Correo</th>
-                    <th>Teléfono</th>
-                    <th>Dirección</th>
-                    <th>Acciones</th>
+                    <th>id</th>
+                    <th>nombre completo</th>
+                    <th>correo</th>
+                    <th>teléfono</th>
+                    <th>dirección</th>
+                    <th>acciones</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -36,16 +36,16 @@
                     <tr>
                         <td>{{ $loop->index + 1 }}</td>
                         <td>{{ $cliente->nombre }} {{ $cliente->apellido_p }} {{ $cliente->apellido_m }}</td>
-                        <td>{{ $cliente->contacto->correo ?? 'Sin correo' }}</td>
-                        <td>{{ $cliente->contacto->telefono ?? 'Sin teléfono' }}</td>
-                        <td>{{ $cliente->Direccion }}</td>
+                        <td>{{ $cliente->contacto->correo ?? 'sin correo' }}</td>
+                        <td>{{ $cliente->contacto->telefono ?? 'sin teléfono' }}</td>
+                        <td>{{ $cliente->direccion }}</td>
                         <td>
-                            <!-- Botón Editar -->
+                            <!-- Botón editar -->
                             <button class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#editModal{{ $cliente->id_cliente }}">
                                 <i class="fa-solid fa-pen-to-square"></i> Editar
                             </button>
 
-                            <!-- Botón Eliminar -->
+                            <!-- Botón eliminar -->
                             <form action="{{ route('clientes.destroy', $cliente->id_cliente) }}" method="POST" style="display:inline;">
                                 @csrf
                                 @method('DELETE')

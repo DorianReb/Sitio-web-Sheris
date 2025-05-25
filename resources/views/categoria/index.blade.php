@@ -23,7 +23,7 @@
             <table class="table table-striped table-hover">
                 <thead class="table-dark rounded-top">
                     <tr>
-                        <th>ID</th>
+                        <th>id_categoria </th>
                         <th>Nombre</th>
                         <th>Descripción</th>
                         <th>Acciones</th>

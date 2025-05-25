@@ -1,23 +1,23 @@
-<div class="modal fade" id="editModal{{ $proveedor->Id_proveedor }}" tabindex="-1" aria-labelledby="editModalLabel{{ $proveedor->Id_proveedor }}" aria-hidden="true">
+<div class="modal fade" id="editModal{{ $proveedor->id_proveedor }}" tabindex="-1" aria-labelledby="editModalLabel{{ $proveedor->id_proveedor }}" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="editModalLabel{{ $proveedor->Id_proveedor }}">Editar Proveedor</h5>
+                <h5 class="modal-title" id="editModalLabel{{ $proveedor->id_proveedor }}">Editar Proveedor</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-            <form action="{{ route('proveedores.update', $proveedor->Id_proveedor) }}" method="POST">
+            <form action="{{ route('proveedores.update', $proveedor->id_proveedor) }}" method="POST">
                 @csrf
                 @method('PUT')
 
                 <div class="mb-3">
-                    <label for="Nombre" class="form-label">Nombre</label>
-                    <input type="text" class="form-control" id="Nombre" name="Nombre" value="{{ old('Nombre', $proveedor->Nombre) }}" required>
+                    <label for="nombre" class="form-label">Nombre</label>
+                    <input type="text" class="form-control" id="nombre" name="nombre" value="{{ old('nombre', $proveedor->nombre) }}" required>
                 </div>
 
                 <div class="mb-3">
-                    <label for="Direccion" class="form-label">Dirección</label>
-                    <textarea class="form-control" id="Direccion" name="Direccion">{{ old('Direccion', $proveedor->Direccion) }}</textarea>
+                    <label for="direccion" class="form-label">Dirección</label>
+                    <textarea class="form-control" id="direccion" name="direccion">{{ old('direccion', $proveedor->direccion) }}</textarea>
                 </div>
 
                 <button type="submit" class="btn btn-success">Actualizar</button>

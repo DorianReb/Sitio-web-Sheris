@@ -63,14 +63,14 @@ class ProveedorController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Proveedor $Id_proveedor)
+   public function update(Request $request, $id_proveedor)
     {
         $request->validate([
             'nombre' => 'required|string|max:255',
             'direccion' => 'nullable|string|max:255',
         ]);
 
-        $proveedor = Proveedor::findOrFail($Id_proveedor);
+        $proveedor = Proveedor::findOrFail($id_proveedor);
 
         $proveedor->update([
             'nombre' => $request->nombre,
@@ -80,15 +80,19 @@ class ProveedorController extends Controller
         return redirect()->route('proveedores.index')->with('success', 'Proveedor actualizado exitosamente.');
     }
 
+
+
+
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Proveedor $id_proveedor)
+    public function destroy($id_proveedor)
     {
-        $proveedor=Proveedor::findOrFail($id_proveedor);
+        $proveedor = Proveedor::findOrFail($id_proveedor);
         $proveedor->delete();
 
         return redirect()->route('proveedores.index')->with('success', 'Proveedor eliminado exitosamente.');
     }
+
 
 }

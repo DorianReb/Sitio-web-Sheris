@@ -6,16 +6,15 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-
 class Categoria extends Model
 {
-    //
-    use softDeletes;
+    use HasFactory, SoftDeletes;
 
-protected $table = 'categorias';
-protected $primaryKey = 'id_categoria';
+    protected $table = 'categorias';
+    protected $primaryKey = 'id_categoria';
     public $timestamps = false;
-protected $fillable = ['nombre', 'descripcion'];
+
+    protected $fillable = ['nombre', 'descripcion'];
 
     public function productos()
     {

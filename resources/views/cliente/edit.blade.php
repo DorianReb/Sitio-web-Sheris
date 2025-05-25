@@ -1,4 +1,4 @@
-<div class="modal fade" id="editModal{{ $cliente->Id_cliente }}" tabindex="-1" aria-labelledby="editModalLabel{{ $cliente->Id_cliente }}" aria-hidden="true">
+<div class="modal fade" id="editModal{{ $cliente->id_cliente }}" tabindex="-1" aria-labelledby="editModalLabel{{ $cliente->id_cliente }}" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -11,8 +11,8 @@
                     @method('PUT')
 
                     <div class="mb-3">
-                        <label for="Nombre" class="form-label">Nombre</label>
-                        <input type="text" class="form-control" name="Nombre" value="{{ $cliente->nombre }}" required>
+                        <label for="nombre" class="form-label">Nombre</label>
+                        <input type="text" class="form-control" name="nombre" value="{{ $cliente->nombre }}" required>
                     </div>
 
                     <div class="mb-3">
@@ -27,7 +27,7 @@
 
                     <div class="mb-3">
                         <label for="direccion" class="form-label">Dirección</label>
-                        <textarea class="form-control" name="Direccion" required>{{ $cliente->direccion }}</textarea>
+                        <textarea class="form-control" name="direccion" required>{{ $cliente->direccion }}</textarea>
                     </div>
 
                     <div class="mb-3">
@@ -36,7 +36,7 @@
                     </div>
 
                     <div class="mb-3">
-                        <label for="Correo" class="form-label">Correo Electrónico</label>
+                        <label for="correo" class="form-label">Correo Electrónico</label>
                         <input type="email" class="form-control" name="correo" value="{{ $cliente->contacto->correo ?? '' }}" required>
                     </div>
 

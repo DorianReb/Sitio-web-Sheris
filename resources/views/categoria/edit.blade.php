@@ -10,7 +10,7 @@
     <table class="table table-striped table-hover">
         <thead>
             <tr>
-                <th>ID</th>
+                <th>id_categoria </th>
                 <th>Nombre</th>
                 <th>Descripción</th>
                 <th>Acciones</th>
@@ -29,20 +29,20 @@
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
                             <div class="modal-body">
-                            <form action="{{ route('categorias.update', $categoria->Id_categoria) }}" method="POST">
+                            <form action="{{ route('categorias.update', $categoria->id_categoria) }}" method="POST">
                                 @csrf
                                 @method('PUT')
 
-                                {{-- Campo Nombre --}}
+                                {{-- Campo nombre --}}
                                 <div class="mb-3">
-                                    <label for="Nombre" class="fs-4 text-dark">Nombre de la Categoría</label>
-                                    <input type="text" id="Nombre" name="Nombre" value="{{ old('Nombre', $categoria->Nombre) }}" required class="form-control">
+                                    <label for="nombre" class="fs-4 text-dark">nombre de la Categoría</label>
+                                    <input type="text" id="nombre" name="nombre" value="{{ old('nombre', $categoria->nombre) }}" required class="form-control">
                                 </div>
 
-                                {{-- Campo Descripción --}}
+                                {{-- Campo descripción --}}
                                 <div class="mb-3">
-                                    <label for="Descripcion" class="fs-4 text-dark">Descripción de la Categoría</label>
-                                    <textarea id="Descripcion" name="Descripcion" required class="form-control" rows="5">{{ old('Descripcion', $categoria->Descripcion) }}</textarea>
+                                    <label for="descripcion" class="fs-4 text-dark">Descripción de la Categoría</label>
+                                    <textarea id="descripcion" name="descripcion" required class="form-control" rows="5">{{ old('descripcion', $categoria->descripcion) }}</textarea>
                                 </div>
 
                                 {{-- Botón de actualización --}}
