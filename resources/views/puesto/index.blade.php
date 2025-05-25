@@ -4,9 +4,13 @@
     <div class="row justify-content-center">
         <div class="col-8">
             <h1 class="alert alert-success">Puestos</h1>
-            <button type="button" class="btn btn-success shadow-sm rounded-pill" data-bs-toggle="modal" data-bs-target="#formModal">
+
+            <!-- Botón para abrir modal Crear -->
+            <button type="button" class="btn btn-success shadow-sm rounded-pill mb-3" data-bs-toggle="modal" data-bs-target="#formModal">
                 <i class="fa-solid fa-plus"></i> Agregar Puesto
             </button>
+
+            @include('puesto.create')
         </div>
     </div>
 
@@ -22,28 +26,28 @@
         <div class="col-8">
             <table class="table table-striped table-hover">
                 <thead class="table-dark rounded-top">
-                <tr>
-                    <th>ID</th>
-                    <th>Nombre</th>
-                    <th>Descripción</th>
-                    <th>Salario Base</th>
-                    <th>Acciones</th>
-                </tr>
+                    <tr>
+                        <th>id_puesto</th>
+                        <th>Nombre</th>
+                        <th>Descripción</th>
+                        <th>Salario Base</th>
+                        <th>Acciones</th>
+                    </tr>
                 </thead>
                 <tbody>
-                @foreach($puestos as $puesto)
+                    @foreach($puestos as $puesto)
                     <tr>
-                        <td>{{$loop->index + 1}}</td>
+                        <td>{{ $loop->index + 1 }}</td>
                         <td>{{ $puesto->nombre }}</td>
                         <td>{{ $puesto->descripcion }}</td>
-                        <td>${{ number_format($puesto->salario_base, 2)}}</td>
+                        <td>${{ number_format($puesto->salario_base, 2) }}</td>
                         <td>
-                            <!-- Modal Editar -->
-                            <a class="btn btn-warning shadow-sm rounded-pill" data-bs-toggle="modal" data-bs-target="#editModal{{ $puesto->id_puesto }}">
+                            <!-- Enlace para ir a la página de editar -->
+                            <a href="{{ route('puestos.edit', $puesto->id_puesto) }}" class="btn btn-warning shadow-sm rounded-pill">
                                 <i class="fa-solid fa-pen-to-square"></i> Editar
                             </a>
 
-                            <!-- Modal de eliminación -->
+                            <!-- Formulario para eliminar -->
                             <form action="{{ route('puestos.destroy', $puesto->id_puesto) }}" method="POST" style="display:inline;">
                                 @csrf
                                 @method('DELETE')
@@ -51,10 +55,9 @@
                             </form>
                         </td>
                     </tr>
+                    @endforeach
                 </tbody>
-                @endforeach
             </table>
         </div>
     </div>
 @endsection
-    

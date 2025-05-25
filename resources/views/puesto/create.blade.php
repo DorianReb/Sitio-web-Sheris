@@ -9,18 +9,18 @@
                     <form action="{{ route('puestos.store') }}" method="POST">
                         @csrf
                         <div class="mb-3">
-                            <label for="Nombre" class="form-label">Nombre</label>
-                            <input type="text" class="form-control" id="Nombre" name="Nombre" required>
+                            <label for="nombre" class="form-label">Nombre</label>
+                            <input type="text" class="form-control" id="nombre" name="nombre" required>
                         </div>
                         <div class="mb-3">
-                            <label for="Descripcion" class="form-label">Descripción</label>
-                            <input type="text" class="form-control" id="Descripcion" name="Descripcion" required>
+                            <label for="descripcion" class="form-label">Descripción</label>
+                            <input type="text" class="form-control" id="descripcion" name="descripcion" required>
                         </div>
                         <div class="mb-3">
-                            <label for="Salario_base" class="form-label">Salario Base</label>
+                            <label for="salario_base" class="form-label">Salario Base</label>
                             <div class="input-group">
                                 <span class="input-group-text">$</span>
-                                <input type="number" class="form-control" id="Salario_base" name="Salario_base" value="{{ old('Salario_base', $puesto->Salario_base) }}" required>
+                                <input type="number" class="form-control" id="salario_base" name="salario_base" value="{{ old('salario_base') }}" required>
                             </div>
                         </div>
                         <button type="submit" class="btn btn-success">Guardar</button>
@@ -38,4 +38,4 @@
             $('form')[0].reset();
         });
     </script>
-@endsection
+
