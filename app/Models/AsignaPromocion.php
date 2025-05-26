@@ -10,7 +10,7 @@ class AsignaPromocion extends Model
     use SoftDeletes;
 
     protected $table = 'asignapromocion';
-    protected $primaryKey = 'Id_asignapromo';
+    protected $primaryKey = 'id_asignapromo';
 
     protected $fillable = [
         'id_producto',

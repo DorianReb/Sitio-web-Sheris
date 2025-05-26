@@ -108,8 +108,9 @@ class AsignaPromocionController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(AsignaPromocion $asignaPromocion)
+    public function destroy($id)
     {
+        $asignaPromocion = AsignaPromocion::findOrFail($id);
         $asignaPromocion->delete();
 
         return redirect()->route('asignapromocion.index')->with('success', 'Asignación eliminada correctamente.');

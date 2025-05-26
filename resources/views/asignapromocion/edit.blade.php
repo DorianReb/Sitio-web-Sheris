@@ -1,4 +1,4 @@
-<div class="modal fade" id="editModal{{ $asignacion->Id_asignapromo }}" tabindex="-1" aria-labelledby="editModalLabel{{ $asignacion->Id_asignapromo }}" aria-hidden="true">
+<div class="modal fade" id="editModal{{ $asignacion->id_asignapromo }}" tabindex="-1" aria-labelledby="editModalLabel{{ $asignacion->id_asignapromo }}" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header bg-warning text-dark">

@@ -32,7 +32,7 @@
                 <tbody>
                 @foreach($asignaciones as $asignacion)
                     <tr>
-                        <td>{{ $asignacion->id_asignapromo }}</td>
+                        <td>{{ $loop->index + 1 }}</td>
                         <td>{{ $asignacion->promocion->nombre ?? 'Sin promoción' }}</td>
                         <td>{{ $asignacion->producto->nombre ?? 'Sin producto' }}</td>
                         <td>
