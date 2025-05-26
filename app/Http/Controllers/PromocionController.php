@@ -43,14 +43,14 @@ class PromocionController extends Controller
 
         if ($request->hasFile('imagen')) {
             $path = $request->file('imagen')->store('promociones', 'public');
-            $data['Imagen'] = $path;
+            $data['imagen'] = $path;
         }
 
-        // Crear la promoción
         Promocion::create($data);
 
         return redirect()->route('promociones.index')->with('success', 'Promoción creada correctamente.');
     }
+
 
     /**
      * Show the form for editing the specified resource.
