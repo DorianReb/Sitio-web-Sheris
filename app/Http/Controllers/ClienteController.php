@@ -16,10 +16,8 @@ class ClienteController extends Controller
 
     public function create()
     {
-        // Obtener todos los contactos
         $contactos = Contacto::all();
 
-        // Pasar la variable $contactos a la vista
         return view('cliente.create', compact('contactos'));
     }
 
@@ -29,12 +27,24 @@ class ClienteController extends Controller
         $request->validate([
             'nombre' => 'required|string|max:255',
             'apellido_p' => 'required|string|max:255',
-            'apellido_m' => 'required|string|max:255',
-            'id_contacto' => 'required|exists:contactos,id_contacto',
+            'apellido_m' => 'nullable|string|max:255',
             'direccion' => 'required|string|max:255',
+            'telefono' => 'required|string|max:255',
+            'correo' => 'required|email|max:255',
         ]);
 
-        Cliente::create($request->all());
+        $contacto = Contacto::create([
+            'telefono' => $request->telefono,
+            'correo' => $request->correo,
+        ]);
+
+        Cliente::create([
+            'nombre' => $request->nombre,
+            'apellido_p' => $request->apellido_p,
+            'apellido_m' => $request->apellido_m,
+            'direccion' => $request->direccion,
+            'id_contacto' => $contacto->id_contacto,
+        ]);
 
         return redirect()->route('clientes.index')->with('success', 'Cliente creado correctamente.');
     }
@@ -56,20 +66,41 @@ class ClienteController extends Controller
 
     public function update(Request $request, $id)
     {
-        // Validar los datos de entrada
         $request->validate([
             'nombre' => 'required|string|max:255',
             'apellido_p' => 'required|string|max:255',
-            'apellido_m' => 'required|string|max:255',
-            'id_contacto' => 'required|exists:contactos,Id_contacto',
+            'apellido_m' => 'nullable|string|max:255',
             'direccion' => 'required|string|max:255',
+            'telefono' => 'required|string|max:255',
+            'correo' => 'required|email|max:255',
         ]);
 
         $cliente = Cliente::findOrFail($id);
-        $cliente->update($request->all());
+
+        $cliente->update([
+            'nombre' => $request->nombre,
+            'apellido_p' => $request->apellido_p,
+            'apellido_m' => $request->apellido_m,
+            'direccion' => $request->direccion,
+        ]);
+
+        if ($cliente->contacto) {
+            $cliente->contacto->update([
+                'telefono' => $request->telefono,
+                'correo' => $request->correo,
+            ]);
+        } else {
+            $contacto = Contacto::create([
+                'telefono' => $request->telefono,
+                'correo' => $request->correo,
+            ]);
+            $cliente->id_contacto = $contacto->id_contacto;
+            $cliente->save();
+        }
 
         return redirect()->route('clientes.index')->with('success', 'Cliente actualizado exitosamente.');
     }
+
 
     public function destroy($id)
     {
