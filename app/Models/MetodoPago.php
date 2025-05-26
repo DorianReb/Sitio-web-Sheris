@@ -12,7 +12,7 @@ class MetodoPago extends Model
     use softDeletes;
 
     protected $table = 'metodo_pago';
-    protected $primaryKey = 'Id_metodo_pago';
+    protected $primaryKey = 'id_metodo_pago';
     protected $fillable = ['metodo'];
     public $timestamps = false;
 

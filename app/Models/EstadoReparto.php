@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class EstadoReparto extends Model
 {
     use HasFactory;
-    use softDeletes;
+    use SoftDeletes;
 
     protected $table = 'estado_reparto';
     protected $primaryKey = 'id_estado';
@@ -17,7 +17,7 @@ class EstadoReparto extends Model
 
 
     public const ESTADOS = [
-        'en tránsito',
+        'En transito',
         'entregado',
         'pendiente',
     ];
@@ -26,7 +26,7 @@ class EstadoReparto extends Model
 
     public function repartos()
     {
-        return $this->hasMany(Reparto::class, 'Id_estado');
+        return $this->hasMany(Reparto::class, 'id_estado');
     }
 
     /**

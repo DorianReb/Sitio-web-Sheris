@@ -50,7 +50,7 @@ class MetodoPagoController extends Controller
     {
 
         $request->validate([
-            'metodo' => 'required|unique:metodo_pago,Metodo,' . $id_metodo_pago . ',id_metodo_pago'
+            'metodo' => 'required|unique:metodo_pago,metodo,' . $id_metodo_pago . ',id_metodo_pago'
         ]);
 
         // Obtener el método de pago a actualizar

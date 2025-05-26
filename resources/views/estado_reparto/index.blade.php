@@ -7,6 +7,37 @@
             <button type="button" class="btn btn-success shadow-sm rounded-pill" data-bs-toggle="modal" data-bs-target="#formModal">
                 <i class="fa-solid fa-plus"></i> Agregar Estado
             </button>
+
+            @if(session('success'))
+                <div class="row justify-content-center mt-3">
+                    <div class="col-8">
+                        <p class="alert alert-success">{{ session('success') }}</p>
+                    </div>
+                </div>
+            @endif
+
+            @if(session('error'))
+                <div class="row justify-content-center mt-3">
+                    <div class="col-8">
+                        <p class="alert alert-danger">{{ session('error') }}</p>
+                    </div>
+                </div>
+            @endif
+
+            @if ($errors->any())
+                <div class="row justify-content-center mt-3">
+                    <div class="col-8">
+                        <div class="alert alert-danger">
+                            <ul class="mb-0">
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            @endif
+
         </div>
     </div>
 
@@ -53,11 +84,84 @@
                         </td>
                     </tr>
 
-                    <!-- Incluir modal de edición -->
-                    @include('estado_reparto.edit', ['estado' => $estado])
+
+                        <!-- Modal Edición -->
+                        <div class="modal fade" id="editModal{{ $estado->id_estado }}" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header bg-warning text-dark">
+                                        <h5 class="modal-title">Editar Estado</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <form action="{{ route('estado_reparto.update', $estado->id_estado) }}" method="POST">
+                                            @csrf
+                                            @method('PUT')
+                                            <div class="mb-3">
+                                                <label for="estado" class="form-label">Estado</label>
+                                                <select class="form-control" id="estado" name="estado" required>
+                                                    @foreach(\App\Models\EstadoReparto::ESTADOS as $estadoValue)
+                                                        <option value="{{ $estadoValue }}" {{ $estadoValue == $estado->estado ? 'selected' : '' }}>{{ $estadoValue }}</option>
+                                                    @endforeach
+
+                                                </select>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="submit" class="btn btn-warning">
+                                                    <i class="fa-solid fa-check"></i> Actualizar
+                                                </button>
+                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                                                    <i class="fa-solid fa-xmark"></i> Cancelar
+                                                </button>
+                                            </div>
+                                        </form>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                 @endforeach
                 </tbody>
             </table>
         </div>
     </div>
+
+    <!-- Modal Agregar Estado -->
+    <div class="modal fade" id="formModal" tabindex="-1" aria-labelledby="formModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header bg-success text-white">
+                    <h5 class="modal-title">Agregar Estado de Reparto</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+                </div>
+                <div class="modal-body">
+                    <form action="{{ route('estado_reparto.store') }}" method="POST">
+                        @csrf
+                        <div class="mb-3">
+                            <label for="Estado" class="form-label">Estado</label>
+                            <select class="form-control" id="estado" name="estado" required>
+                                @foreach(\App\Models\EstadoReparto::ESTADOS as $estado)
+                                    <option value="{{ $estado }}">{{ $estado }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="submit" class="btn btn-success">
+                                <i class="fa-solid fa-check"></i> Guardar
+                            </button>
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                                <i class="fa-solid fa-xmark"></i> Cancelar
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        $('#formModal').on('hidden.bs.modal', function () {
+            $('form')[0].reset();
+        });
+    </script>
 @endsection
