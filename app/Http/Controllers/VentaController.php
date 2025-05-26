@@ -6,6 +6,7 @@ use App\Models\Venta;
 use App\Models\Empleado;
 use App\Models\Cliente;
 use App\Models\MetodoPago;
+use App\Models\Producto;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
 use App\Models\DetalleVenta;
@@ -20,8 +21,9 @@ class VentaController extends Controller
         $metodos_pago = MetodoPago::all();
         $empleados = Empleado::all();
         $clientes = Cliente::all();
+        $productos = Producto::all();
 
-        return view('venta.create', compact('empleados', 'clientes', 'metodos_pago'));
+        return view('venta.index', compact('ventas', 'empleados', 'clientes', 'metodos_pago', 'productos'));
 
     }
 
@@ -31,7 +33,9 @@ class VentaController extends Controller
         $empleados = Empleado::all();
         $clientes = Cliente::all();
         $metodos_pago = MetodoPago::all();
-        return view('venta.create', compact('empleados', 'clientes','metodos_pago'));
+        $productos = Producto::all(); // <- Esto es lo que necesitas
+
+        return view('ventas.create', compact('empleados', 'clientes', 'metodos_pago', 'productos'));
     }
 
     public function store(Request $request)
@@ -95,8 +99,10 @@ class VentaController extends Controller
     {
         $empleados = Empleado::all();
         $clientes = Cliente::all();
-        $metodo_pago = MetodoPago::all();
-        return view('venta.edit', compact('venta', 'empleados', 'clientes','metodo_pago'));
+        $metodos_pago = MetodoPago::all();
+        $productos = Producto::all(); // <-- Aquí
+
+        return view('venta.edit', compact('venta', 'empleados', 'clientes', 'metodos_pago', 'productos'));
     }
 
     public function update(Request $request, Venta $venta)

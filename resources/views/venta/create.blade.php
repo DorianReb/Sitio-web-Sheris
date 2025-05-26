@@ -1,6 +1,6 @@
 <!-- Modal Crear Venta -->
 <div class="modal fade" id="createVentaModal" tabindex="-1" aria-labelledby="createVentaModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg"> <!-- Más ancho por los detalles -->
+    <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="createVentaModalLabel">Crear Venta</h5>
@@ -46,21 +46,17 @@
                     </div>
 
                     <hr>
-
                     <h6>Detalles de la venta</h6>
-
                     <table class="table" id="detallesTable">
                         <thead>
-                        <tr>
-                            <th>Producto</th>
-                            <th>Cantidad</th>
-                            <th>Subtotal</th>
-                            <th><button type="button" class="btn btn-sm btn-primary" id="addDetalleBtn">+ Agregar</button></th>
-                        </tr>
+                            <tr>
+                                <th>Producto</th>
+                                <th>Cantidad</th>
+                                <th>Subtotal</th>
+                                <th><button type="button" class="btn btn-sm btn-primary" id="addDetalleBtn">+ Agregar</button></th>
+                            </tr>
                         </thead>
-                        <tbody>
-                        <!-- Aquí se agregarán las filas de detalles -->
-                        </tbody>
+                        <tbody></tbody>
                     </table>
 
                     <div class="mb-3 text-end">
@@ -72,7 +68,6 @@
                         <button type="submit" class="btn btn-success">Guardar Venta</button>
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
                     </div>
-
                 </form>
             </div>
         </div>
@@ -82,7 +77,7 @@
 <!-- Script para agregar filas y calcular total -->
 <script>
     document.addEventListener('DOMContentLoaded', function() {
-        const productos = @json($productos); // Lista productos desde el backend
+        const productos = @json($productos);
         const detallesTableBody = document.querySelector('#detallesTable tbody');
         const addDetalleBtn = document.getElementById('addDetalleBtn');
         const totalInput = document.getElementById('totalVenta');
@@ -90,10 +85,10 @@
         function crearFilaDetalle() {
             const tr = document.createElement('tr');
 
-            // Celda Producto
+            // Producto
             const tdProducto = document.createElement('td');
             const selectProducto = document.createElement('select');
-            selectProducto.name = 'detalles[][Id_producto]';
+            selectProducto.name = 'detalles[][id_producto]';
             selectProducto.classList.add('form-select');
             selectProducto.required = true;
 
@@ -104,18 +99,18 @@
 
             productos.forEach(p => {
                 const opt = document.createElement('option');
-                opt.value = p.Id_producto;
-                opt.text = p.Nombre;
+                opt.value = p.id_producto;
+                opt.text = p.nombre;
                 selectProducto.appendChild(opt);
             });
             tdProducto.appendChild(selectProducto);
             tr.appendChild(tdProducto);
 
-            // Celda Cantidad
+            // Cantidad
             const tdCantidad = document.createElement('td');
             const inputCantidad = document.createElement('input');
             inputCantidad.type = 'number';
-            inputCantidad.name = 'detalles[][Cantidad]';
+            inputCantidad.name = 'detalles[][cantidad]';
             inputCantidad.min = 1;
             inputCantidad.value = 1;
             inputCantidad.classList.add('form-control');
@@ -123,20 +118,20 @@
             tdCantidad.appendChild(inputCantidad);
             tr.appendChild(tdCantidad);
 
-            // Celda Subtotal
+            // Subtotal
             const tdSubtotal = document.createElement('td');
             const inputSubtotal = document.createElement('input');
             inputSubtotal.type = 'number';
-            inputSubtotal.name = 'detalles[][Subtotal]';
+            inputSubtotal.name = 'detalles[][subtotal]';
             inputSubtotal.min = 0;
             inputSubtotal.step = '0.01';
             inputSubtotal.value = 0;
             inputSubtotal.classList.add('form-control');
-            inputSubtotal.readOnly = true; // Se calcula automáticamente
+            inputSubtotal.readOnly = true;
             tdSubtotal.appendChild(inputSubtotal);
             tr.appendChild(tdSubtotal);
 
-            // Celda eliminar
+            // Eliminar
             const tdEliminar = document.createElement('td');
             const btnEliminar = document.createElement('button');
             btnEliminar.type = 'button';
@@ -149,14 +144,14 @@
             tdEliminar.appendChild(btnEliminar);
             tr.appendChild(tdEliminar);
 
-            // Evento para actualizar subtotal y total cuando cambia producto o cantidad
+            // Actualización dinámica
             function actualizarSubtotal() {
                 const productoId = selectProducto.value;
                 const cantidad = parseFloat(inputCantidad.value) || 0;
-                const producto = productos.find(p => p.Id_producto == productoId);
+                const producto = productos.find(p => p.id_producto == productoId);
 
-                if(producto) {
-                    const subtotal = cantidad * parseFloat(producto.Precio);
+                if (producto) {
+                    const subtotal = cantidad * parseFloat(producto.precio);
                     inputSubtotal.value = subtotal.toFixed(2);
                 } else {
                     inputSubtotal.value = 0;
@@ -172,7 +167,7 @@
 
         function actualizarTotal() {
             let total = 0;
-            detallesTableBody.querySelectorAll('input[name="detalles[][Subtotal]"]').forEach(input => {
+            detallesTableBody.querySelectorAll('input[name="detalles[][subtotal]"]').forEach(input => {
                 total += parseFloat(input.value) || 0;
             });
             totalInput.value = total.toFixed(2);
@@ -183,7 +178,6 @@
             detallesTableBody.appendChild(fila);
         });
 
-        // Agregar una fila al cargar para que el usuario no empiece con tabla vacía
-        addDetalleBtn.click();
+        addDetalleBtn.click(); // una fila inicial
     });
 </script>

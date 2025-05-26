@@ -72,11 +72,6 @@
                         <i class="fa-solid fa-tags"></i> Asignar Promociones
                     </a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link text-light fw-bold" href="{{ route('ventas.index') }}">
-                        <i class="fa-solid fa-shopping-cart"></i> Ventas
-                    </a>
-                </li>
             </ul>
 
             <!-- Botón de regresar al Landing Page -->
