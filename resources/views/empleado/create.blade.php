@@ -45,7 +45,7 @@
                             <option value="">Seleccione un contacto</option>
                             @foreach($contactos as $contacto)
                                 <option value="{{ $contacto->id_contacto }}">
-                                    {{ $contacto->Correo }} - {{ $contacto->telefono }}
+                                    {{ $contacto->correo }} - {{ $contacto->telefono }}
                                 </option>
                             @endforeach
                         </select>

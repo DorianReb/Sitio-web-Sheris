@@ -35,7 +35,7 @@
                         <select class="form-control" name="id_puesto" required>
                             <option value="">Seleccione un puesto</option>
                             @foreach($puestos as $puesto)
-                                <option value="{{ $puesto->id_puesto }}" {{ $empleado->id_puesto == $puesto->id_puesto ? 'selected' : '' }}>{{ $puesto->Nombre }}</option>
+                                <option value="{{ $puesto->id_puesto }}" {{ $empleado->id_puesto == $puesto->id_puesto ? 'selected' : '' }}>{{ $puesto->nombre }}</option>
                             @endforeach
                         </select>
                     </div>

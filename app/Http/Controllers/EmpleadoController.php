@@ -20,8 +20,6 @@ class EmpleadoController extends Controller
         $contactos = Contacto::all();
         return view('empleado.index', compact('empleados','puestos', 'contactos'));
 
-
-
     }
 
     /**
